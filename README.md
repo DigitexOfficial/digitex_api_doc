@@ -6,8 +6,8 @@ Every json-response has common fields:
 
 ```json
 {
-    "success": true, // or false in case of error
-    "err_code": 777, // in case of success==false
+    "success": true/false,
+    "err_code": 777,
     "err_msg": "Error description"
 }
 ```
