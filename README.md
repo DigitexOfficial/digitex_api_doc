@@ -2,6 +2,18 @@
 
 ## Market Data API
 
+Every json-response has common fields:
+
+```json
+{
+    "success": true, // or false in case of error
+    "err_code": 777, // in case of success==false
+    "err_msg": "Error description"
+}
+```
+
+Currently we Digitex Exchange has `market_id` which is not linked to any unique string identifier like `BTC/DGTX-PERP`.
+
 ### Endpoints
 
 ------
@@ -14,10 +26,9 @@
 
 **Response**
 
-| Parameter | Type                                    | Description                 |
-| --------- | --------------------------------------- | --------------------------- |
-| status    | String                                  | online/offline/maintenance  |
-| markets   | [ {'id':1, 'symbol': 'BTC/DGTX-PERP'} ] | additional data is possible |
+| Parameter | Type   | Description                |
+| --------- | ------ | -------------------------- |
+| status    | String | online/offline/maintenance |
 
 ------
 
@@ -101,10 +112,12 @@
 
 **Response**
 
-| Parameter | Type   | Description |
-| --------- | ------ | ----------- |
-| px        | String |             |
-| qty       | String |             |
+| Parameter | Type    | Description  |
+| --------- | ------- | ------------ |
+| ts        | int64   |              |
+| side      | Strings | "buy"/"sell" |
+| px        | String  |              |
+| qty       | String  |              |
 
 ------
 
