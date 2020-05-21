@@ -174,7 +174,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/futures/v1/orderbook`
+`GET /api/v1/orderbook`
 
 | Parameters | Type   | Description          |
 | ---------- | ------ | -------------------- |
@@ -183,11 +183,27 @@ And in case of error response would be like:
 
 **Response**
 
-| Parameters | Type                                                     | Description                         |
-| ---------- | -------------------------------------------------------- | ----------------------------------- |
-| ts         | int64                                                    | timestamp                           |
-| bids       | [ [String, String], [String, String], [String, String] ] | [ [px, qty], [px, qty], [px, qty] ] |
-| asks       | [ [String, String], [String, String], [String, String] ] | [ [px, qty], [px, qty], [px, qty] ] |
+```json
+{
+  "status":"ok",
+  "ts":1590069149104170,
+  "data": {
+    "bids":[
+      ["9220.0000","29644"],
+      ["9215.0000","68492"],
+      ["9210.0000","10"],
+      ["9205.0000","1000"],
+      ["9200.0000","10"]
+    "asks":[
+      ["9225.0000","45786"],
+      ["9230.0000","3061"],
+      ["9235.0000","500"],
+      ["9240.0000","7544"],
+      ["9245.0000","77379"]
+    ]
+  }
+}
+```
 
 ------
 
