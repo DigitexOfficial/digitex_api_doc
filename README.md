@@ -2,33 +2,130 @@
 
 ## Market Data API
 
-Every json-response has common fields:
+Every response has the following structure in case of success. Field `data` could be either an object or an array.
 
 ```json
 {
-    "success": true/false,
-    "err_code": 777,
-    "err_msg": "Error description"
+  "status": "ok",
+  "data": {}
 }
 ```
 
-Currently we Digitex Exchange has `market_id` which is not linked to any unique string identifier like `BTC/DGTX-PERP`.
+And in case of error response would be like:
+
+```json
+{
+  "status": "error",
+  "code": 2222,
+  "msg": "error description"
+}
+```
 
 ### Endpoints
 
-------
-
-#### Public - Status
+#### Public - Contracts
 
 **HTTP Request**
 
-`GET /api/futures/v1/platform/status`
+`GET /api/v1/public/contracts`
 
 **Response**
 
-| Parameter | Type   | Description                |
-| --------- | ------ | -------------------------- |
-| status    | String | online/offline/maintenance |
+```json
+{
+  "status": "ok",
+  "ts":1589982905754000
+  "data": [
+    {
+      "id": 1,
+      "name": "BTC/USD-PERP",
+      "symbol": "BTCUSD-PERP",
+      "type": "perpetual_futures",
+      "tradeable": true,
+      "baseAsset": "BTC",
+      "quoteAsset": "USD",
+      "pnlAsset": "DGTX",
+      "marginAsset": "DGTX",
+      "lotSize": 1,
+      "tickPrice": 1,
+      "tickSize": 5,
+      "isQuanto": true,
+      "isInverse": false,
+      "underlyingAsset": "coin/token/index",
+      "indexSymbol": ".BTCUSD",
+      "premiumIndex": ".DGTXBTCUSD",
+      "fundingRate": 0.0003,
+      "fundingPeriod": 28800,
+      "markType": "fair_price",
+    }
+  ]
+}
+```
+
+------
+
+#### Public - Assets
+
+**HTTP Request**
+
+`GET /api/v1/public/assets`
+
+**Response**
+
+```json
+{
+  "status": "ok",
+  "ts":1589982905754000
+  "data": [
+    {
+      "id": 1,
+      "symbol": "DGTX",
+      "precision": 4,
+    },
+    {
+      "id": 2,
+      "symbol": "BTC",
+      "precision": 8,
+    },
+    {
+      "id": 3,
+      "symbol": "USD",
+      "precision": 2,
+    },
+    {
+      "id": 4,
+      "symbol": "ETH",
+      "precision": 8,
+    },
+    {
+      "id": 5,
+      "symbol": "XRP",
+      "precision": 8,
+    }
+  ]
+}
+```
+
+------
+
+#### Public - Ping
+
+**HTTP Request**
+
+`GET /api/v1/ping`
+
+**Response**
+
+```json
+{
+  "status": "ok",
+  "data": {}
+}
+```
+
+------
+
+
 
 ------
 
@@ -36,7 +133,7 @@ Currently we Digitex Exchange has `market_id` which is not linked to any unique 
 
 **HTTP Request**
 
-`GET /api/futures/v1/platform/time`
+`GET /api/v1/time`
 
 **Response**
 
@@ -112,12 +209,12 @@ Currently we Digitex Exchange has `market_id` which is not linked to any unique 
 
 **Response**
 
-| Parameter | Type    | Description  |
-| --------- | ------- | ------------ |
-| ts        | int64   |              |
-| side      | Strings | "buy"/"sell" |
-| px        | String  |              |
-| qty       | String  |              |
+| Parameter | Type   | Description  |
+| --------- | ------ | ------------ |
+| ts        | int64  |              |
+| side      | String | "buy"/"sell" |
+| px        | String |              |
+| qty       | String |              |
 
 ------
 
