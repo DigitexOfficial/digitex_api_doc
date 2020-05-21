@@ -34,7 +34,7 @@ And in case of error response would be like:
 ```json
 {
   "status": "ok",
-  "ts":1589982905754000
+  "ts":1589982905754000,
   "data": [
     {
       "id": 1,
@@ -75,7 +75,7 @@ And in case of error response would be like:
 ```json
 {
   "status": "ok",
-  "ts":1589982905754000
+  "ts":1589982905754000,
   "data": [
     {
       "id": 1,
@@ -119,13 +119,43 @@ And in case of error response would be like:
 ```json
 {
   "status": "ok",
+  "ts":1589982905754000,
   "data": {}
 }
 ```
 
 ------
 
+#### Public - Announcement
 
+**HTTP Request**
+
+`GET /api/v1/announcement`
+
+**Response**
+
+```json
+{
+  "status": "ok",
+  "ts":1589982905754000,
+  "data": [
+    {
+      "id": 1,
+      "link": "string",
+      "title": "string",
+      "content": "string",
+      "date": "2020-05-21T08:08:49.464Z"
+    },
+    {
+      "id": 2,
+      "link": "string",
+      "title": "string",
+      "content": "string",
+      "date": "2020-05-21T08:08:49.464Z"
+    }
+  ]
+}
+```
 
 ------
 
