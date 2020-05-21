@@ -56,7 +56,7 @@ And in case of error response would be like:
       "premiumIndex": ".DGTXBTCUSD",
       "fundingRate": 0.0003,
       "fundingPeriod": 28800,
-      "markType": "fair_price",
+      "markType": "fair_price"
     }
   ]
 }
@@ -117,11 +117,7 @@ And in case of error response would be like:
 **Response**
 
 ```json
-{
-  "status": "ok",
-  "ts":1589982905754000,
-  "data": {}
-}
+{}
 ```
 
 ------
