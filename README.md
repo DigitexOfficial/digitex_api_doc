@@ -176,10 +176,10 @@ And in case of error response would be like:
 
 `GET /api/v1/orderbook`
 
-| Parameters | Type   | Description          |
-| ---------- | ------ | -------------------- |
-| symbol     | String | e.g. 'BTC/DGTX-PERP' |
-| depth      | int64  | Default: 5.          |
+| Parameters | Type   | Description        |
+| ---------- | ------ | ------------------ |
+| symbol     | String | e.g. 'BTCUSD-PERP' |
+| depth      | int64  | Default: 5.        |
 
 **Response**
 
@@ -207,35 +207,28 @@ And in case of error response would be like:
 
 ------
 
-#### Public - Ticker
+#### Public - Stats
 
 **HTTP Request**
 
-`GET /api/futures/v1/ticker`
+`GET /api/v1/stats`
 
-| Parameters | Type   | Description          |
-| ---------- | ------ | -------------------- |
-| symbol     | String | e.g. 'BTC/DGTX-PERP' |
+| Parameters | Type   | Description        |
+| ---------- | ------ | ------------------ |
+| symbol     | String | e.g. 'BTCUSD-PERP' |
 
 **Response**
 
-| Parameters     | Type   | Description          |
-| -------------- | ------ | -------------------- |
-| symbol         | String | e.g. 'BTC/DGTX-PERP' |
-| open_time      | int64  | timestamp            |
-| close_time     | int64  | timestamp            |
-| high_px_24h    | String |                      |
-| low_px_24h     | String |                      |
-| volume_24h     | String |                      |
-| last_trade_px  | String |                      |
-| last_trade_qty | String |                      |
-| funding_time   | int64  | timestamp            |
-| funding_rate   | String |                      |
-| best_bid_px    | String |                      |
-| best_bid_size  | String |                      |
-| best_ask_px    | String |                      |
-| best_ask_size  | String |                      |
-| mark_price     | String |                      |
+| Parameters  | Type   | Description        |
+| ----------- | ------ | ------------------ |
+| symbol      | String | e.g. 'BTCUSD-PERP' |
+| openTime    | int64  | timestamp          |
+| closeTime   | int64  | timestamp          |
+| highPx24h   | String |                    |
+| lowPx24h    | String |                    |
+| volume24h   | String |                    |
+| fundingTime | int64  | timestamp          |
+| fundingRate | String |                    |
 
 ------
 
@@ -245,9 +238,9 @@ And in case of error response would be like:
 
 `GET /api/futures/v1/trade/last`
 
-| Parameter | Type   | Description          |
-| --------- | ------ | -------------------- |
-| symbol    | String | e.g. 'BTC/DGTX-PERP' |
+| Parameter | Type   | Description        |
+| --------- | ------ | ------------------ |
+| symbol    | String | e.g. 'BTCUSD-PERP' |
 
 **Response**
 
@@ -268,7 +261,7 @@ And in case of error response would be like:
 
 | Parameter | Type   | Description            |
 | --------- | ------ | ---------------------- |
-| symbol    | String | e.g. 'BTC/DGTX-PERP'   |
+| symbol    | String | e.g. 'BTCUSD-PERP'     |
 | size      | int64  | Default: 50. Max: 200. |
 
 **Response**
@@ -310,9 +303,9 @@ And in case of error response would be like:
 
 `GET /api/futures/v1/index`
 
-| Parameter | Type   | Description          |
-| --------- | ------ | -------------------- |
-| symbol    | String | e.g. 'BTC/DGTX-PERP' |
+| Parameter | Type   | Description        |
+| --------- | ------ | ------------------ |
+| symbol    | String | e.g. 'BTCUSD-PERP' |
 
 **Response**
 
