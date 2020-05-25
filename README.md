@@ -33,32 +33,45 @@ And in case of error response would be like:
 
 ```json
 {
-  "status": "ok",
-  "ts":1589982905754000,
-  "data": [
-    {
-      "id": 1,
-      "name": "BTC/USD-PERP",
-      "symbol": "BTCUSD-PERP",
-      "type": "perpetual_futures",
-      "tradable": true,
-      "baseCurrency": "BTC",
-      "quoteCurrency": "USD",
-      "pnlCurrency": "DGTX",
-      "marginCurrency": "DGTX",
-      "lotSize": 1,
-      "tickPrice": 1,
-      "tickSize": 5,
-      "isQuanto": true,
-      "isInverse": false,
-      "underlyingAsset": "coin/token/index",
-      "indexSymbol": ".BTCUSD",
-      "premiumIndex": ".DGTXBTCUSD",
-      "fundingRate": 0.0003,
-      "fundingPeriod": 28800,
-      "markType": "fair_price"
-    }
-  ]
+    "status":"ok",
+    "ts":1590404891291,
+    "data":[
+        {
+            "id":1,
+            "name":"BTC/USD-PERP",
+            "symbol":"BTCUSD-PERP",
+            "type":"perpetual_futures",
+            "tradable":true,
+            "baseCurrency":"BTC",
+            "quoteCurrency":"USD",
+            "pnlCurrency":"DGTX",
+            "marginCurrency":"DGTX",
+            "lotSize":1,
+            "tickPrice":1,
+            "isQuanto":true,
+            "isInverse":false,
+            "underlyingAsset":"token",
+            "indexSymbol":".DGTXBTCUSD",
+            "premiumIndexSymbol":"",
+            "fundingRate":0.0003,
+            "fundingPeriod":28800,
+            "indicativeFundingRate":0,
+            "markType":"fair_price",
+            "initMargin":0,
+            "maintMargin":0,
+            "deleverage":false,
+            "createTime":0,
+            "listingTime":0,
+            "expiryTime":0,
+            "settleTime":0,
+            "makerFee":0,
+            "takerFee":0,
+            "settlementFee":0,
+            "insuranceFee":0,
+            "minPrice":0,
+            "maxPrice":0
+        }
+    ]
 }
 ```
 
@@ -75,7 +88,7 @@ And in case of error response would be like:
 ```json
 {
   "status": "ok",
-  "ts":1589982905754000,
+  "ts":1590402678700,
   "data": [
     {
       "id": 1,
@@ -133,7 +146,7 @@ And in case of error response would be like:
 ```json
 {
   "status": "ok",
-  "ts":1589982905754000,
+  "ts":1590402678700,
   "data": [
     {
       "id": 1,
@@ -186,8 +199,9 @@ And in case of error response would be like:
 ```json
 {
   "status":"ok",
-  "ts":1590069149104170,
+  "ts":1590402678700,
   "data": {
+    "symbol":"BTCUSD-PERP",
     "bids":[
       ["9220.0000","29644"],
       ["9215.0000","68492"],
@@ -220,16 +234,28 @@ And in case of error response would be like:
 
 **Response**
 
-| Parameters  | Type   | Description        |
-| ----------- | ------ | ------------------ |
-| symbol      | String | e.g. 'BTCUSD-PERP' |
-| openTime    | int64  | timestamp          |
-| closeTime   | int64  | timestamp          |
-| highPx24h   | String |                    |
-| lowPx24h    | String |                    |
-| volume24h   | String |                    |
-| fundingTime | int64  | timestamp          |
-| fundingRate | String |                    |
+```json
+{
+   "status":"ok",
+   "ts":1590413564472,
+   "data":{
+      "symbol":"BTCUSD-PERP",
+      "openTime":1590327120000,
+      "closeTime":1590413520000,
+      "highPx24h":"9150.0000",
+      "lowPx24h":"8645.0000",
+      "volume24h":"714064643",
+      "fundingTime":1590422400000,
+      "fundingRate":"0.00030000",
+      "bestBidPx":"8750.0000",
+      "bestBidQty":"70723",
+      "bestAskPx":"8755.0000",
+      "bestAskQty":"32428",
+      "lastTradePx":"8755.0000",
+      "lastTradeQty":"11286"
+   }
+}
+```
 
 ------
 
@@ -237,7 +263,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/futures/v1/trade/last`
+`GET /api/v1/trade/last`
 
 | Parameter | Type   | Description        |
 | --------- | ------ | ------------------ |
