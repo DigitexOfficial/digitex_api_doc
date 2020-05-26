@@ -60,6 +60,8 @@ And in case of error response would be like:
             "initMargin":0,
             "maintMargin":0,
             "deleverage":false,
+            "isLeverage": true,
+            "maxLeverage": 20,
             "createTime":0,
             "listingTime":0,
             "expiryTime":0,
@@ -87,35 +89,75 @@ And in case of error response would be like:
 
 ```json
 {
-  "status": "ok",
-  "ts":1590402678700,
-  "data": [
-    {
-      "id": 1,
-      "symbol": "DGTX",
-      "precision": 4,
-    },
-    {
-      "id": 2,
-      "symbol": "BTC",
-      "precision": 8,
-    },
-    {
-      "id": 3,
-      "symbol": "USD",
-      "precision": 2,
-    },
-    {
-      "id": 4,
-      "symbol": "ETH",
-      "precision": 8,
-    },
-    {
-      "id": 5,
-      "symbol": "XRP",
-      "precision": 8,
-    }
-  ]
+   "status":"ok",
+   "ts":1590428686166,
+   "data":[
+      {
+         "id":2,
+         "name":"Bitcoin",
+         "symbol":"BTC",
+         "type":"coin",
+         "precision":8,
+         "hasDeposit":false,
+         "hasWithdraw":false,
+         "depositFee":0,
+         "withdrawFee":0,
+         "minDepositSize":0,
+         "maxDepositSize":0
+      },
+      {
+         "id":3,
+         "name":"US Dollar",
+         "symbol":"USD",
+         "type":"coin",
+         "precision":2,
+         "hasDeposit":false,
+         "hasWithdraw":false,
+         "depositFee":0,
+         "withdrawFee":0,
+         "minDepositSize":0,
+         "maxDepositSize":0
+      },
+      {
+         "id":4,
+         "name":"Ethereum",
+         "symbol":"ETH",
+         "type":"coin",
+         "precision":8,
+         "hasDeposit":false,
+         "hasWithdraw":false,
+         "depositFee":0,
+         "withdrawFee":0,
+         "minDepositSize":0,
+         "maxDepositSize":0
+      },
+      {
+         "id":5,
+         "name":"Ripple",
+         "symbol":"XRP",
+         "type":"coin",
+         "precision":8,
+         "hasDeposit":false,
+         "hasWithdraw":false,
+         "depositFee":0,
+         "withdrawFee":0,
+         "minDepositSize":0,
+         "maxDepositSize":0
+      },
+      {
+         "id":1,
+         "name":"Digitex Token",
+         "symbol":"DGTX",
+         "type":"token",
+         "precision":4,
+         "hasDeposit":false,
+         "hasWithdraw":false,
+         "depositFee":0,
+         "withdrawFee":0,
+         "minDepositSize":0,
+         "maxDepositSize":0
+      }
+   ]
 }
 ```
 
@@ -153,14 +195,18 @@ And in case of error response would be like:
       "link": "string",
       "title": "string",
       "content": "string",
-      "date": "2020-05-21T08:08:49.464Z"
+      "date": "2020-05-21T08:08:49.464Z",
+      "tags": ["tag1", "tag2"],
+      "urgent": true,
     },
     {
       "id": 2,
       "link": "string",
       "title": "string",
       "content": "string",
-      "date": "2020-05-21T08:08:49.464Z"
+      "date": "2020-05-21T08:08:49.464Z",
+      "tags": ["tag3"],
+      "urgent": false,
     }
   ]
 }
@@ -271,12 +317,19 @@ And in case of error response would be like:
 
 **Response**
 
-| Parameter | Type   | Description  |
-| --------- | ------ | ------------ |
-| ts        | int64  |              |
-| side      | String | "buy"/"sell" |
-| px        | String |              |
-| qty       | String |              |
+```json
+{
+   "status":"ok",
+   "ts":1590481932218,
+   "data": {
+      "symbol":"BTCUSD-PERP",
+      "px":"8975.0000",
+      "qty":"8208"
+   }
+}
+```
+
+
 
 ------
 
@@ -284,7 +337,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/futures/v1/trade/history`
+`GET /api/v1/history/trade`
 
 | Parameter | Type   | Description            |
 | --------- | ------ | ---------------------- |
@@ -293,9 +346,22 @@ And in case of error response would be like:
 
 **Response**
 
-| Parameter | Type                 | Description                       |
-| --------- | -------------------- | --------------------------------- |
-| trades    | [ {trade}, {trade} ] | trade - see `Last Trade` endpoint |
+```json
+{
+    "status":"ok",
+    "ts":1590490455721,
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "trades":[
+            ["8880.0000","5"],
+            ["8880.0000","96"],
+            ["8880.0000","635"],
+            ["8880.0000","9283"],
+            ["8880.0000","6740"]
+        ]
+    }
+}
+```
 
 ------
 
@@ -303,7 +369,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/futures/v1/klines`
+`GET /api/v1/history/klines`
 
 | Parameter  | Type         | Description                    |
 | ---------- | ------------ | ------------------------------ |
@@ -328,7 +394,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/futures/v1/index`
+`GET /api/v1/index`
 
 | Parameter | Type   | Description        |
 | --------- | ------ | ------------------ |
