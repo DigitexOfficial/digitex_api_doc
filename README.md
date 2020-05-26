@@ -349,15 +349,15 @@ And in case of error response would be like:
 ```json
 {
     "status":"ok",
-    "ts":1590490455721,
+    "ts":1590497248414,
     "data":{
         "symbol":"BTCUSD-PERP",
         "trades":[
-            ["8880.0000","5"],
-            ["8880.0000","96"],
-            ["8880.0000","635"],
-            ["8880.0000","9283"],
-            ["8880.0000","6740"]
+            ["8815.0000","32"],
+            ["8815.0000","4"],
+            ["8815.0000","301"],
+            ["8815.0000","85"],
+            ["8815.0000","1"]
         ]
     }
 }
@@ -408,11 +408,11 @@ And in case of error response would be like:
 
 ------
 
-#### Public - Index
+#### Public - Mark Price
 
 **HTTP Request**
 
-`GET /api/v1/index`
+`GET /api/v1/mark_price`
 
 | Parameter | Type   | Description        |
 | --------- | ------ | ------------------ |
@@ -420,10 +420,16 @@ And in case of error response would be like:
 
 **Response**
 
-| Parameter | Type   | Description |
-| --------- | ------ | ----------- |
-| ts        | int64  | timestamp   |
-| px        | String | index price |
+```json
+{
+    "status":"ok",
+    "ts":1590497191142,
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "px":"8816.2804"
+    }
+}
+```
 
 ------
 
