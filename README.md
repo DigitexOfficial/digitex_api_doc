@@ -371,22 +371,40 @@ And in case of error response would be like:
 
 `GET /api/v1/history/klines`
 
-| Parameter  | Type         | Description                    |
-| ---------- | ------------ | ------------------------------ |
-| resolution | String/int64 | 60s, 1m, etc. / 60, 3600, etc. |
-| start_time | int64        | timestamp                      |
-| end_time   | int64        | timestamp                      |
+| Parameter | Type   | Description            |
+| --------- | ------ | ---------------------- |
+| symbol    | String | e.g. 'BTCUSD-PERP'     |
+| size      | int64  | Default: 60. Max: 1440 |
 
 **Response**
 
-| Parameter | Type   | Description |
-| --------- | ------ | ----------- |
-| ts        | int64  | timestamp   |
-| open      | String |             |
-| high      | String |             |
-| low       | String |             |
-| close     | String |             |
-| volume    | String |             |
+```json
+{
+    "status":"ok",
+    "ts":1590494157693,
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "klines":[
+            {
+                "id":1590493920,
+                "o":"8880.0000",
+                "h":"8885.0000",
+                "l":"8875.0000",
+                "c":"8880.0000",
+                "v":"463705"
+            },
+            {
+                "id":1590493980,
+                "o":"8880.0000",
+                "h":"8885.0000",
+                "l":"8875.0000",
+                "c":"8880.0000",
+                "v":"347447"
+            }
+        ]
+    }
+}
+```
 
 ------
 
