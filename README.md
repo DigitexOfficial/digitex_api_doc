@@ -365,11 +365,11 @@ And in case of error response would be like:
 
 ------
 
-#### Public - Klines
+#### Public - Kline History
 
 **HTTP Request**
 
-`GET /api/v1/history/klines`
+`GET /api/v1/history/kline`
 
 | Parameter | Type   | Description            |
 | --------- | ------ | ---------------------- |
