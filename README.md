@@ -429,25 +429,43 @@ And in case of error response would be like:
 
 ------
 
-#### Public - Mark Price
+#### Public - Index
 
 **HTTP Request**
 
-`GET /api/v1/mark_price`
+`GET /api/v1/index`
 
-| Parameter | Type   | Description        |
-| --------- | ------ | ------------------ |
-| symbol    | String | e.g. 'BTCUSD-PERP' |
+| Parameter | Type   | Description                        |
+| --------- | ------ | ---------------------------------- |
+| symbol    | String | e.g. 'BTCUSD-PERP'; ***optional*** |
 
 **Response**
 
 ```json
 {
     "status":"ok",
-    "ts":1590737342054,
+    "ts":1590751652363,
     "data":{
-        "symbol":"BTCUSD-PERP",
-        "px":9523.461
+        "BTCUSD-PERP":{
+            "updated":0,
+            "markPx":9388.7828,
+            "fairPx":0,
+            "spotPx":0,
+            "components":{
+                "binance":{
+                    "weight":0,"ts":0,"px":0,"vol":0
+                },
+                "bitfinex":{
+                    "weight":0,"ts":0,"px":0,"vol":0
+                },
+                "coinbasepro":{
+                    "weight":0,"ts":0,"px":0,"vol":0
+                },
+                "kraken":{
+                    "weight":0,"ts":0,"px":0,"vol":0
+                }
+            }
+        }
     }
 }
 ```
