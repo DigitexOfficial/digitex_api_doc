@@ -244,25 +244,26 @@ And in case of error response would be like:
 
 ```json
 {
-  "status":"ok",
-  "ts":1590402678700,
-  "data": {
-    "symbol":"BTCUSD-PERP",
-    "bids":[
-      ["9220.0000","29644"],
-      ["9215.0000","68492"],
-      ["9210.0000","10"],
-      ["9205.0000","1000"],
-      ["9200.0000","10"]
-    ],
-    "asks":[
-      ["9225.0000","45786"],
-      ["9230.0000","3061"],
-      ["9235.0000","500"],
-      ["9240.0000","7544"],
-      ["9245.0000","77379"]
-    ]
-  }
+    "status":"ok",
+    "ts":1590737035730,
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "updated":1590737035653,
+        "bids":[
+            [9530,15432],
+            [9525,12640],
+            [9520,73561],
+            [9515,68109],
+            [9510,19895]
+        ],
+        "asks":[
+            [9535,63584],
+            [9540,51424],
+            [9545,79901],
+            [9550,56939],
+            [9555,161822]
+        ]
+    }
 }
 ```
 
@@ -274,32 +275,31 @@ And in case of error response would be like:
 
 `GET /api/v1/stats`
 
-| Parameters | Type   | Description        |
-| ---------- | ------ | ------------------ |
-| symbol     | String | e.g. 'BTCUSD-PERP' |
-
 **Response**
 
 ```json
 {
-   "status":"ok",
-   "ts":1590413564472,
-   "data":{
-      "symbol":"BTCUSD-PERP",
-      "openTime":1590327120000,
-      "closeTime":1590413520000,
-      "highPx24h":"9150.0000",
-      "lowPx24h":"8645.0000",
-      "volume24h":"714064643",
-      "fundingTime":1590422400000,
-      "fundingRate":"0.00030000",
-      "bestBidPx":"8750.0000",
-      "bestBidQty":"70723",
-      "bestAskPx":"8755.0000",
-      "bestAskQty":"32428",
-      "lastTradePx":"8755.0000",
-      "lastTradeQty":"11286"
-   }
+    "status":"ok",
+    "ts":1590736884842,
+    "data":[
+        {
+            "symbol":"BTCUSD-PERP",
+            "openTime":1590650460000,
+            "closeTime":1677050460000,
+            "highPx24h":9625,
+            "lowPx24h":9110,
+            "volume24h":694250105,
+            "fundingTime":1590739200000000,
+            "fundingRate":0.0003,
+            "bestBidPx":9530,
+            "bestBidQty":14007,
+            "bestAskPx":9535,
+            "bestAskQty":57248,
+            "lastTradePx":9535,
+            "lastTradeQty":38645,
+            "lastTradeTs":1590736884753
+        }
+    ]
 }
 ```
 
@@ -309,7 +309,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/trade/last`
+`GET /api/v1/trades/last`
 
 | Parameter | Type   | Description        |
 | --------- | ------ | ------------------ |
@@ -319,13 +319,14 @@ And in case of error response would be like:
 
 ```json
 {
-   "status":"ok",
-   "ts":1590481932218,
-   "data": {
-      "symbol":"BTCUSD-PERP",
-      "px":"8975.0000",
-      "qty":"8208"
-   }
+    "status":"ok",
+    "ts":1590736996540,
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "px":9535,
+        "qty":5261,
+        "ts":1590736996453
+    }
 }
 ```
 
@@ -337,27 +338,47 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/history/trade`
+`GET /api/v1/trades`
 
-| Parameter | Type   | Description            |
-| --------- | ------ | ---------------------- |
-| symbol    | String | e.g. 'BTCUSD-PERP'     |
-| size      | int64  | Default: 50. Max: 200. |
+| Parameter | Type   | Description           |
+| --------- | ------ | --------------------- |
+| symbol    | String | e.g. 'BTCUSD-PERP'    |
+| size      | int64  | Default: 5. Max: 200. |
 
 **Response**
 
 ```json
 {
     "status":"ok",
-    "ts":1590497248414,
+    "ts":1590737141606,
     "data":{
         "symbol":"BTCUSD-PERP",
         "trades":[
-            ["8815.0000","32"],
-            ["8815.0000","4"],
-            ["8815.0000","301"],
-            ["8815.0000","85"],
-            ["8815.0000","1"]
+            {
+                "px":9530,
+                "qty":26,
+                "ts":1590737104653
+            },
+            {
+                "px":9530,
+                "qty":2,
+                "ts":1590737104653
+            },
+            {
+                "px":9530,
+                "qty":1,
+                "ts":1590737104653
+            },
+            {
+                "px":9530,
+                "qty":2,
+                "ts":1590737104653
+            },
+            {
+                "px":9530,
+                "qty":48,
+                "ts":1590737104653
+            }
         ]
     }
 }
@@ -369,7 +390,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/history/kline`
+`GET /api/v1/klines`
 
 | Parameter | Type   | Description            |
 | --------- | ------ | ---------------------- |
@@ -381,25 +402,25 @@ And in case of error response would be like:
 ```json
 {
     "status":"ok",
-    "ts":1590494157693,
+    "ts":1590737272724,
     "data":{
         "symbol":"BTCUSD-PERP",
         "klines":[
             {
-                "id":1590493920,
-                "o":"8880.0000",
-                "h":"8885.0000",
-                "l":"8875.0000",
-                "c":"8880.0000",
-                "v":"463705"
+                "id":1590736620,
+                "o":9535,
+                "h":9545,
+                "l":9530,
+                "c":9540,
+                "v":382175
             },
             {
-                "id":1590493980,
-                "o":"8880.0000",
-                "h":"8885.0000",
-                "l":"8875.0000",
-                "c":"8880.0000",
-                "v":"347447"
+                "id":1590736680,
+                "o":9540,
+                "h":9545,
+                "l":9525,
+                "c":9530,
+                "v":474006
             }
         ]
     }
@@ -423,10 +444,10 @@ And in case of error response would be like:
 ```json
 {
     "status":"ok",
-    "ts":1590497191142,
+    "ts":1590737342054,
     "data":{
         "symbol":"BTCUSD-PERP",
-        "px":"8816.2804"
+        "px":9523.461
     }
 }
 ```
