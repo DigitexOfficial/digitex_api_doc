@@ -310,45 +310,16 @@ And in case of error response would be like:
 
 ------
 
-#### Public - Last Trade
-
-**HTTP Request**
-
-`GET /api/v1/public/trades/last`
-
-| Parameter | Type   | Description        |
-| --------- | ------ | ------------------ |
-| symbol    | String | e.g. 'BTCUSD-PERP' |
-
-**Response**
-
-```json
-{
-    "status":"ok",
-    "ts":1590736996540,
-    "data":{
-        "symbol":"BTCUSD-PERP",
-        "px":9535,
-        "qty":5261,
-        "ts":1590736996453
-    }
-}
-```
-
-
-
-------
-
-#### Public - Trade History
+#### Public - Trades
 
 **HTTP Request**
 
 `GET /api/v1/public/trades`
 
-| Parameter | Type   | Description           |
-| --------- | ------ | --------------------- |
-| symbol    | String | e.g. 'BTCUSD-PERP'    |
-| size      | int64  | Default: 5. Max: 200. |
+| Parameter | Type   | Description             |
+| --------- | ------ | ----------------------- |
+| symbol    | String | e.g. 'BTCUSD-PERP'      |
+| count     | int64  | Default: 100. Max: 200. |
 
 **Response**
 
@@ -391,7 +362,7 @@ And in case of error response would be like:
 
 ------
 
-#### Public - Kline History
+#### Public - Klines
 
 **HTTP Request**
 
