@@ -371,7 +371,7 @@ And in case of error response would be like:
 | Parameter | Type   | Description            |
 | --------- | ------ | ---------------------- |
 | symbol    | String | e.g. 'BTCUSD-PERP'     |
-| size      | int64  | Default: 60. Max: 1440 |
+| count     | int64  | Default: 60. Max: 1440 |
 
 **Response**
 
@@ -413,32 +413,34 @@ And in case of error response would be like:
 
 | Parameter | Type   | Description                        |
 | --------- | ------ | ---------------------------------- |
-| symbol    | String | e.g. 'BTCUSD-PERP'; ***optional*** |
+| symbol    | String | e.g. '.DGTXBTCUSD'; ***optional*** |
 
 **Response**
 
 ```json
 {
     "status":"ok",
-    "ts":1590751652363,
+    "ts":1590999736854,
     "data":{
-        "BTCUSD-PERP":{
-            "updated":0,
-            "markPx":9388.7828,
+        ".DGTXBTCUSD":{
+            "indexSymbol":".DGTXBTCUSD",
+            "contracts":["BTCUSD-PERP"],
+            "updated":1590999736783,
+            "markPx":9549.4469,
             "fairPx":0,
             "spotPx":0,
             "components":{
                 "binance":{
-                    "weight":0,"ts":0,"px":0,"vol":0
+                    "weight":25,"ts":0,"px":0,"vol":0
                 },
                 "bitfinex":{
-                    "weight":0,"ts":0,"px":0,"vol":0
+                    "weight":25,"ts":0,"px":0,"vol":0
                 },
                 "coinbasepro":{
-                    "weight":0,"ts":0,"px":0,"vol":0
+                    "weight":25,"ts":0,"px":0,"vol":0
                 },
                 "kraken":{
-                    "weight":0,"ts":0,"px":0,"vol":0
+                    "weight":25,"ts":0,"px":0,"vol":0
                 }
             }
         }
