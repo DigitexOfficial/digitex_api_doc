@@ -222,10 +222,15 @@ And in case of error response would be like:
 
 **Response**
 
-| Parameters | Type   | Description               |
-| ---------- | ------ | ------------------------- |
-| iso        | String | "2020-05-15T14:03:29.038" |
-| ts         | int64  | timestamp                 |
+```json
+{
+    "status":"ok",
+    "data":{
+        "iso":"2020-06-01T09:17:46.825",
+        "timestamp":1590992266825
+    }
+}
+```
 
 ------
 
