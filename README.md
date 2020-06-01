@@ -274,35 +274,35 @@ And in case of error response would be like:
 
 ------
 
-#### Public - Stats
+#### Public - Markets
 
 **HTTP Request**
 
-`GET /api/v1/public/stats`
+`GET /api/v1/public/markets`
 
 **Response**
 
 ```json
 {
     "status":"ok",
-    "ts":1590736884842,
+    "ts":1590993332256,
     "data":[
         {
             "symbol":"BTCUSD-PERP",
-            "openTime":1590650460000,
-            "closeTime":1677050460000,
-            "highPx24h":9625,
-            "lowPx24h":9110,
-            "volume24h":694250105,
-            "fundingTime":1590739200000000,
+            "openTime":1590906900000,
+            "closeTime":1590993300000,
+            "highPx24h":9640,
+            "lowPx24h":9390,
+            "volume24h":682494894,
+            "fundingTime":1590998400000,
             "fundingRate":0.0003,
-            "bestBidPx":9530,
-            "bestBidQty":14007,
-            "bestAskPx":9535,
-            "bestAskQty":57248,
-            "lastTradePx":9535,
-            "lastTradeQty":38645,
-            "lastTradeTs":1590736884753
+            "bestBidPx":9555,
+            "bestBidQty":16424,
+            "bestAskPx":9560,
+            "bestAskQty":31076,
+            "lastTradePx":9555,
+            "lastTradeQty":4936,
+            "lastTradeTs":1590993332183
         }
     ]
 }
