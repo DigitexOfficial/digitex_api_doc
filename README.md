@@ -167,7 +167,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/ping`
+`GET /api/v1/public/ping`
 
 **Response**
 
@@ -181,7 +181,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/announcement`
+`GET /api/v1/public/announcement`
 
 **Response**
 
@@ -218,7 +218,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/time`
+`GET /api/v1/public/time`
 
 **Response**
 
@@ -238,7 +238,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/orderbook`
+`GET /api/v1/public/orderbook`
 
 | Parameters | Type   | Description        |
 | ---------- | ------ | ------------------ |
@@ -278,7 +278,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/stats`
+`GET /api/v1/public/stats`
 
 **Response**
 
@@ -314,7 +314,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/trades/last`
+`GET /api/v1/public/trades/last`
 
 | Parameter | Type   | Description        |
 | --------- | ------ | ------------------ |
@@ -343,7 +343,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/trades`
+`GET /api/v1/public/trades`
 
 | Parameter | Type   | Description           |
 | --------- | ------ | --------------------- |
@@ -395,7 +395,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/klines`
+`GET /api/v1/public/klines`
 
 | Parameter | Type   | Description            |
 | --------- | ------ | ---------------------- |
@@ -438,7 +438,7 @@ And in case of error response would be like:
 
 **HTTP Request**
 
-`GET /api/v1/index`
+`GET /api/v1/public/index`
 
 | Parameter | Type   | Description                        |
 | --------- | ------ | ---------------------------------- |
