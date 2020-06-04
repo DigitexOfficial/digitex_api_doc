@@ -15,7 +15,7 @@ The `id` used in JSON as an identifier of the request. The response for the part
     "id": 1,
     "method": "subscribe",
     "params": [
-        "BTCUSD-PERP@orderbook25"
+        "BTCUSD-PERP@orderbook_25"
     ]
 }
 ```
@@ -38,7 +38,7 @@ The `id` used in JSON as an identifier of the request. The response for the part
     "id": 1,
     "method": "unsubscribe",
     "params": [
-        "BTCUSD-PERP@orderbook25"
+        "BTCUSD-PERP@orderbook_25"
     ]
 }
 ```
@@ -66,7 +66,7 @@ The `id` used in JSON as an identifier of the request. The response for the part
 #### List of public channels
 
 - orderbook_25
-- trade
+- trades
 - kline_1min
 
 #### Orderbook stream
@@ -130,6 +130,7 @@ Message
     "e": "kline",
     "i": "1min",
     "s": "BTCUSD-PERP",
+    "id": 1591274820,
     "o": 9325,
     "h": 9540,
     "l": 9250,
