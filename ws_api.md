@@ -63,6 +63,32 @@ The `id` used in JSON as an identifier of the request. The response for the part
 }
 ```
 
+#### Subscription list
+
+**Request**
+
+```json
+{
+    "id": 1,
+    "method": "subscriptions",
+    "params": []
+}
+```
+
+**Response**
+
+```json
+{
+    "id":2,
+    "status":"ok",
+    "result":[
+        "BTCUSD-PERP@kline_1min"
+    ]
+} 
+```
+
+
+
 #### List of public channels
 
 - orderbook_25
