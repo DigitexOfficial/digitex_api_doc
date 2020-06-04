@@ -65,19 +65,19 @@ The `id` used in JSON as an identifier of the request. The response for the part
 
 #### List of public channels
 
-- orderbook25
+- orderbook_25
 - trade
 - kline_1min
 
 #### Orderbook stream
 
-**Stream name:** `<symbol>@orderbook25`
+**Stream name:** `<symbol>@orderbook_25`
 
 Message
 
 ```json
 {
-    "e": "orderbook25",
+    "e": "orderbook_25",
     "s": "BTCUSD-PERP",
     "u": 12457823654,
     "b": [
@@ -93,13 +93,13 @@ Message
 
 #### Trade stream
 
-**Stream name:** `<symbol>@trade`
+**Stream name:** `<symbol>@trades`
 
 Message
 
 ```json
 {
-    "e": "trade",
+    "e": "trades",
     "s": "BTCUSD-PERP",
     "t": [
         {
