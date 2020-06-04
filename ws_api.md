@@ -1,0 +1,140 @@
+### Public Websocket API Draft
+
+#### General information
+
+Server send message `ping` every 30 seconds. Client should respond with message `pong` or it would be disconnected. 
+
+The `id` used in JSON as an identifier of the request. The response for the particular request has the same `id` value.
+
+#### Subscribe to a stream
+
+**Request**
+
+```json
+{
+    "id": 1,
+    "method": "subscribe",
+    "params": [
+        "BTCUSD-PERP@orderbook25"
+    ]
+}
+```
+
+**Response**
+
+```json
+{
+    "id": 1,
+    "status": "ok"
+}
+```
+
+#### Unsubscribe from stream
+
+**Request**
+
+```json
+{
+    "id": 1,
+    "method": "unsubscribe",
+    "params": [
+        "BTCUSD-PERP@orderbook25"
+    ]
+}
+```
+
+**Response**
+
+```json
+{
+    "id": 1,
+    "status": "ok"
+}
+```
+
+**Response in case of error**
+
+```json
+{
+    "id": 1,
+    "status": "error",
+    "code": 501,
+    "msg": "unknown contract"
+}
+```
+
+#### List of public channels
+
+- orderbook25
+- trade
+- kline_1min
+
+#### Orderbook stream
+
+**Stream name:** `<symbol>@orderbook25`
+
+Message
+
+```json
+{
+    "e": "orderbook25",
+    "s": "BTCUSD-PERP",
+    "u": 12457823654,
+    "b": [
+        [9250, 100],
+        [9245, 350]
+    ],
+    "a": [
+        [9255, 50],
+        [9260, 150]
+    ]
+}
+```
+
+#### Trade stream
+
+**Stream name:** `<symbol>@trade`
+
+Message
+
+```json
+{
+    "e": "trade",
+    "s": "BTCUSD-PERP",
+    "t": [
+        {
+            "px": 9412,
+            "qty": 500,
+            "ts": 2245712569
+        },
+        {
+            "px": 9315,
+            "qty": 200,
+            "ts": 22457145698
+        },
+        {
+            "px": 9245,
+            "qty": 750,
+            "ts": 1246587413
+        }
+    ]   
+}
+```
+
+#### Kline stream
+
+**Stream name:** `<symbol>@kline_1min`
+
+```json
+{
+    "e": "kline",
+    "i": "1min",
+    "s": "BTCUSD-PERP",
+    "o": 9325,
+    "h": 9540,
+    "l": 9250,
+    "c": 9420,
+    "v": 10000
+}
+```
+
