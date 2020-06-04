@@ -368,10 +368,13 @@ And in case of error response would be like:
 
 `GET /api/v1/public/klines`
 
-| Parameter | Type   | Description            |
-| --------- | ------ | ---------------------- |
-| symbol    | String | e.g. 'BTCUSD-PERP'     |
-| count     | int64  | Default: 60. Max: 1440 |
+| Parameter | Type   | Description                                                  |
+| --------- | ------ | ------------------------------------------------------------ |
+| symbol    | String | Contract symbol or index symbol, e.g. 'BTCUSD-PERP', '.DGTXBTCUSD' |
+| interval  | String | Default: '1min'. Possible values: '1min', '3min', '5min', '15min', '30min', '1h', '3h', '6h', '12h', '1D', '3D', '1W', '3W', '1M', '3M', '6M', '1Y' |
+| from      | int64  | Default: 0.                                                  |
+| to        | int64  | Default: 0.                                                  |
+| count     | int64  | Default: 60. Max: 1500                                       |
 
 **Response**
 
@@ -381,6 +384,7 @@ And in case of error response would be like:
     "ts":1590737272724,
     "data":{
         "symbol":"BTCUSD-PERP",
+        "interval": "1min",
         "klines":[
             {
                 "id":1590736620,
