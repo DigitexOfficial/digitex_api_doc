@@ -91,30 +91,30 @@ The `id` used in JSON as an identifier of the request. The response for the part
 
 #### List of public channels
 
-- orderbook_25
+- orderbook_5, orderbook_10, orderbook_25, orderbook_50, orderbook_100, orderbook_200
 - trades
 - kline_1min
 
 #### Orderbook stream
 
-**Stream name:** `<symbol>@orderbook_25`
+**Stream name:** `<symbol>@orderbook_5`
 
 Message
 
 ```json
 {
-    "e": "orderbook_25",
-    "s": "BTCUSD-PERP",
-    "u": 12457823654,
-    "b": [
-        [9250, 100],
-        [9245, 350]
-    ],
-    "a": [
-        [9255, 50],
-        [9260, 150]
-    ]
-}
+    "ch":"orderbook_5",
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "updated":1591295037813,
+        "bids":[
+            [9840,53914],[9835,26103],[9830,37644],[9825,21331],[9820,43942]
+        ],
+        "asks":[
+            [9845,15899],[9850,85810],[9855,41480],[9860,39565],[9865,40374]
+        ]
+    }
+} 
 ```
 
 #### Trade stream
@@ -125,26 +125,15 @@ Message
 
 ```json
 {
-    "e": "trades",
-    "s": "BTCUSD-PERP",
-    "t": [
-        {
-            "px": 9412,
-            "qty": 500,
-            "ts": 2245712569
-        },
-        {
-            "px": 9315,
-            "qty": 200,
-            "ts": 22457145698
-        },
-        {
-            "px": 9245,
-            "qty": 750,
-            "ts": 1246587413
-        }
-    ]   
-}
+    "ch":"trades",
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "trades":[
+            {"px":9845,"qty":2356,"ts":1591295123213},
+            {"px":9845,"qty":75,"ts":1591295123213}
+        ]
+    }
+} 
 ```
 
 #### Kline stream
@@ -153,15 +142,17 @@ Message
 
 ```json
 {
-    "e": "kline",
-    "i": "1min",
-    "s": "BTCUSD-PERP",
-    "id": 1591274820,
-    "o": 9325,
-    "h": 9540,
-    "l": 9250,
-    "c": 9420,
-    "v": 10000
+    "ch":"kline_1min",
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "interval":"1min",
+        "id":1591295280,
+        "o":9835,
+        "h":9840,
+        "l":9825,
+        "c":9830,
+        "v":654088
+    }
 }
 ```
 
