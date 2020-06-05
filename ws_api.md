@@ -202,7 +202,7 @@ Message
 }
 ```
 
-#### Symbol ticker channel
+#### Ticker channel
 
 **Channel name:** `<symbol>@ticker`
 
