@@ -109,7 +109,7 @@ Message
     "ch":"orderbook_5",
     "data":{
         "symbol":"BTCUSD-PERP",
-        "updated":1591295037813,
+        "ts":1591295037813,
         "bids":[
             [9840,53914],[9835,26103],[9830,37644],[9825,21331],[9820,43942]
         ],
@@ -143,6 +143,10 @@ Message
 
 **Channel name:** `<symbol>@kline_1min`
 
+Only `1min` interval is supported now.
+
+*Kline history is in development, only single kline is published every minute*
+
 Message
 
 ```json
@@ -169,16 +173,12 @@ Message
 
 ```json
 {
-	"ch": "liquidations",
-	"data":
-        "symbol": "BTCUSD-PERP",
-        "orders": [
-            {
-                "px": 9540,
-                "qty": 100,
-                "ts": 123456789000 
-            }
-	    ]
+    "ch":"liquidations",
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "orders":[
+            {"px":9540,"qty":100,"ts":123456789000}
+        ]
     }
 }
 ```
@@ -191,14 +191,10 @@ Message
 
 ```json
 {
-	"ch": "insurance",
-	"data": [
-        {
-            "currency": "BTC",
-            "ts": 123456789000,
-            "balance": 1000
-        }
-	]
+    "ch":"insurance",
+    "data":[
+        {"currency":"DGTX","ts":123456789000,"balance":1000}
+    ]
 }
 ```
 
@@ -210,26 +206,26 @@ Message
 
 ```json
 {
-	"ch": "ticker",
-	"data": {
-        "symbol": "BTCUSD-PERP",
-	    "openTime":1590906900000,
+    "ch":"ticker",
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "openTime":1590906900000,
         "closeTime":1590993300000,
-	    "bidPx": 9420,
-	    "bidQty": 100,
-	    "askPx": 9450,
-	    "askQty": 250,
-	    "lastPx": 9400,
-        "lastQty": 200,
-	    "pxChange24h": 0.009353,
-        "highPx24h": 7267.50,
-        "lowPx24h": 7067.00,
-        "volume24h": 78053288,
-        "markPx": 7230,
-        "indexPx": 7235,
-        "openInterest": 117860186,
-        "fundingRate": 0.0003,
-        "nextFundingTime": 123456789000
+        "bidPx":9420,
+        "bidQty":100,
+        "askPx":9450,
+        "askQty":250,
+        "lastPx":9400,
+        "lastQty":200,
+        "pxChange24h":0.009353,
+        "highPx24h":7267.50,
+        "lowPx24h":7067.00,
+        "volume24h":78053288,
+        "markPx":7230,
+        "indexPx":7235,
+        "openInterest":117860186,
+        "fundingRate":0.0003,
+        "nextFundingTime":123456789000
     }
 }
 ```
@@ -242,11 +238,11 @@ Message
 
 ```json
 {
-	"ch": "funding",
-	"data": {
-        "symbol": "BTCUSD-PERP",
-	    "ts": 157743360000,
-        "rate": 0.0003
+    "ch":"funding",
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "ts":157743360000,
+        "rate":0.0003
     }
 }
 ```
@@ -259,27 +255,18 @@ Message
 
 ```json
 {
-    "ch": "index",
-	"data": {
-        "symbol": "BTCUSD-PERP",
-        "indexSymbol": ".DGTXBTCUSD",
-        "updated": 1590999736783,
-        "markPx": 9549,
-        "fairPx": 9548,
-        "spotPx": 9565,
+    "ch":"index",
+    "data":{
+        "indexSymbol":".DGTXBTCUSD",
+        "ts":1590999736783,
+        "markPx":9549,
+        "fairPx":9548,
+        "spotPx":9565,
         "components":{
-            "binance":{
-                "weight":25,"ts":0,"px":0,"vol":0
-            },
-            "bitfinex":{
-                "weight":25,"ts":0,"px":0,"vol":0
-            },
-            "coinbasepro":{
-                "weight":25,"ts":0,"px":0,"vol":0
-            },
-            "kraken":{
-                "weight":25,"ts":0,"px":0,"vol":0
-            }
+            "binance":{"weight":25,"ts":0,"px":0,"vol":0},
+            "bitfinex":{"weight":25,"ts":0,"px":0,"vol":0},
+            "coinbasepro":{"weight":25,"ts":0,"px":0,"vol":0},
+            "kraken":{"weight":25,"ts":0,"px":0,"vol":0}
         }
     }
 }
