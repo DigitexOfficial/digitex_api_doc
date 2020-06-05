@@ -6,7 +6,7 @@ Server send message `ping` every 30 seconds. Client should respond with message 
 
 The `id` used in JSON as an identifier of the request. The response for the particular request has the same `id` value.
 
-#### Subscribe to a stream
+#### Subscribe to a channel
 
 **Request**
 
@@ -29,7 +29,7 @@ The `id` used in JSON as an identifier of the request. The response for the part
 }
 ```
 
-#### Unsubscribe from stream
+#### Unsubscribe from a channel
 
 **Request**
 
@@ -87,17 +87,15 @@ The `id` used in JSON as an identifier of the request. The response for the part
 } 
 ```
 
-
-
 #### List of public channels
 
 - orderbook_5, orderbook_10, orderbook_25, orderbook_50, orderbook_100, orderbook_200
 - trades
 - kline_1min
 
-#### Orderbook stream
+#### Orderbook channel
 
-**Stream name:** `<symbol>@orderbook_5`
+**Channel name:** `<symbol>@orderbook_5`
 
 Message
 
@@ -117,9 +115,9 @@ Message
 } 
 ```
 
-#### Trade stream
+#### Trade channel
 
-**Stream name:** `<symbol>@trades`
+**Channel name:** `<symbol>@trades`
 
 Message
 
@@ -136,9 +134,11 @@ Message
 } 
 ```
 
-#### Kline stream
+#### Kline channel
 
-**Stream name:** `<symbol>@kline_1min`
+**Channel name:** `<symbol>@kline_1min`
+
+Message
 
 ```json
 {
@@ -152,6 +152,131 @@ Message
         "l":9825,
         "c":9830,
         "v":654088
+    }
+}
+```
+
+#### Liquidations channel
+
+**Channel name:** `<symbol>@liquidations`
+
+Message
+
+```json
+{
+	"ch": "liquidations",
+	"data":
+        "symbol": "BTCUSD-PERP",
+        "orders": [
+            {
+                "px": 9540,
+                "qty": 100,
+                "ts": 123456789000 
+            }
+	    ]
+    }
+}
+```
+
+#### Insurance fund channel
+
+**Channel name:** `<symbol>@insurance`
+
+Message
+
+```json
+{
+	"ch": "insurance",
+	"data": [
+        {
+            "currency": "BTC",
+            "ts": 123456789000,
+            "balance": 1000
+        }
+	]
+}
+```
+
+#### Symbol ticker channel
+
+**Channel name:** `<symbol>@ticker`
+
+Message
+
+```json
+{
+	"ch": "ticker",
+	"data": {
+        "symbol": "BTCUSD-PERP",
+	    "ts": 123456789000,
+	    "bidPx": 9420,
+	    "bidQty": 100,
+	    "askPx": 9450,
+	    "askQty": 250,
+	    "lastPx": 9400,
+        "lastQty": 200,
+	    "prevPx24h": 9100,
+	    "pxChange24h": 0.009353,
+        "highPx24h": 7267.50,
+        "lowPx24h": 7067.00,
+        "openPx24h": 7125,
+        "volume24h": 78053288,
+        "markPx": 7230,
+        "indexPx": 7235,
+        "openInterest": 117860186,
+        "fundingRate": 0.0003,
+        "nextFundingTime": 123456789000
+    }
+}
+```
+
+#### Funding channel
+
+**Channel name:** `<symbol>@funding`
+
+Message
+
+```json
+{
+	"ch": "funding",
+	"data": {
+        "symbol": "BTCUSD-PERP",
+	    "ts": 157743360000,
+        "rate": 0.0003
+    }
+}
+```
+
+#### Index channel
+
+**Channel name:** `<symbol>@index`
+
+Message
+
+```json
+{
+    "ch": "index",
+	"data": {
+        "symbol": "BTCUSD-PERP",
+        "indexSymbol": ".DGTXBTCUSD",
+        "updated": 1590999736783,
+        "markPx": 9549,
+        "fairPx": 9548,
+        "spotPx": 9565,
+        "components":{
+            "binance":{
+                "weight":25,"ts":0,"px":0,"vol":0
+            },
+            "bitfinex":{
+                "weight":25,"ts":0,"px":0,"vol":0
+            },
+            "coinbasepro":{
+                "weight":25,"ts":0,"px":0,"vol":0
+            },
+            "kraken":{
+                "weight":25,"ts":0,"px":0,"vol":0
+            }
+        }
     }
 }
 ```
