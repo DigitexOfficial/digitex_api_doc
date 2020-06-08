@@ -169,6 +169,8 @@ Message
 
 **Channel name:** `<symbol>@liquidations`
 
+**Note:** not implemented yet.
+
 Message
 
 ```json
@@ -186,6 +188,8 @@ Message
 #### Insurance fund channel
 
 **Channel name:** `<symbol>@insurance`
+
+**Note:** not implemented yet.
 
 Message
 
@@ -217,13 +221,9 @@ Message
         "askQty":250,
         "lastPx":9400,
         "lastQty":200,
-        "pxChange24h":0.009353,
         "highPx24h":7267.50,
         "lowPx24h":7067.00,
         "volume24h":78053288,
-        "markPx":7230,
-        "indexPx":7235,
-        "openInterest":117860186,
         "fundingRate":0.0003,
         "nextFundingTime":123456789000
     }
