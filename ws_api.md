@@ -251,6 +251,8 @@ Message
 
 **Channel name:** `<symbol>@index`
 
+Symbol can be either a contract symbol (`BTCUSD-PERP`) or index symbol (`.DGTXBTCUSD`).
+
 Message
 
 ```json
