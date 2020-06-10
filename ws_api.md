@@ -187,7 +187,7 @@ Message
 
 #### Insurance fund channel
 
-**Channel name:** `<symbol>@insurance`
+**Channel name:** `exchange@insurance`
 
 **Note:** not implemented yet.
 
