@@ -240,10 +240,10 @@ And in case of error response would be like:
 
 `GET /api/v1/public/orderbook`
 
-| Parameters | Type   | Description        |
-| ---------- | ------ | ------------------ |
-| symbol     | String | e.g. 'BTCUSD-PERP' |
-| depth      | int64  | Default: 5.        |
+| Parameters | Type   | Description          |
+| ---------- | ------ | -------------------- |
+| symbol     | String | e.g. 'BTCUSD-PERP'   |
+| depth      | int64  | Default: 5. Max: 200 |
 
 **Response**
 
@@ -294,6 +294,7 @@ And in case of error response would be like:
             "highPx24h":9640,
             "lowPx24h":9390,
             "volume24h":682494894,
+            "volume24hUsd":2852425063.05,
             "fundingTime":1590998400000,
             "fundingRate":0.0003,
             "bestBidPx":9555,
@@ -302,13 +303,19 @@ And in case of error response would be like:
             "bestAskQty":31076,
             "lastTradePx":9555,
             "lastTradeQty":4936,
-            "lastTradeTs":1590993332183
+            "lastTradeTs":1590993332183,
+            "contractValue":194.9,
+            "dgtxUsdRate":0.03728994
         }
     ]
 }
 ```
 
 ------
+
+`volume24hUsd` is calculated as: `volume24h` * `contractValue` * `dgtxUsdRate`.
+
+`contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_PRICE`, where `TICK_SIZE`=5 and `TICK_PRICE`=0.1 for BTCUSD-PERP contract.
 
 #### Public - Trades
 
@@ -371,7 +378,7 @@ And in case of error response would be like:
 | Parameter | Type   | Description                                                  |
 | --------- | ------ | ------------------------------------------------------------ |
 | symbol    | String | Contract symbol or index symbol, e.g. 'BTCUSD-PERP', '.DGTXBTCUSD' |
-| interval  | String | Default: '1min'. Possible values: '1min', '3min', '5min', '15min', '30min', '1h', '3h', '6h', '12h', '1D', '3D', '1W', '3W', '1M', '3M', '6M', '1Y' |
+| interval  | String | Default: `1min`. Possible values: `1min`, `3min`, `5min`, `15min`, `30min`, `1h`, `3h`, `6h`, `12h`, `1D`, `3D`, `1W`, `3W`, `1M`, `3M`, `6M`, `1Y` |
 | from      | int64  | Default: 0.                                                  |
 | to        | int64  | Default: 0.                                                  |
 | count     | int64  | Default: 60. Max: 1500                                       |

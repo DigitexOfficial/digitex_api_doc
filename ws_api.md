@@ -222,13 +222,20 @@ Message
         "lastPx":9400,
         "lastQty":200,
         "highPx24h":7267.50,
+        "volume24hUsd":2852425063.05,
         "lowPx24h":7067.00,
         "volume24h":78053288,
         "fundingRate":0.0003,
-        "nextFundingTime":123456789000
+        "nextFundingTime":123456789000,
+        "contractValue":194.9,
+        "dgtxUsdRate":0.03728994
     }
 }
 ```
+
+`volume24hUsd` is calculated as: `volume24h` * `contractValue` * `dgtxUsdRate`.
+
+`contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_PRICE`, where `TICK_SIZE`=5 and `TICK_PRICE`=0.1 for BTCUSD-PERP contract.
 
 #### Funding channel
 
