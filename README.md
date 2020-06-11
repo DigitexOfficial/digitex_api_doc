@@ -92,6 +92,19 @@ And in case of error response would be like:
    "status":"ok",
    "ts":1590428686166,
    "data":[
+       {
+         "id":1,
+         "name":"Digitex Token",
+         "symbol":"DGTX",
+         "type":"token",
+         "precision":4,
+         "hasDeposit":true,
+         "hasWithdraw":true,
+         "depositFee":0,
+         "withdrawFee":0,
+         "minDepositSize":0,
+         "maxDepositSize":0
+      },
       {
          "id":2,
          "name":"Bitcoin",
@@ -137,19 +150,6 @@ And in case of error response would be like:
          "symbol":"XRP",
          "type":"coin",
          "precision":8,
-         "hasDeposit":false,
-         "hasWithdraw":false,
-         "depositFee":0,
-         "withdrawFee":0,
-         "minDepositSize":0,
-         "maxDepositSize":0
-      },
-      {
-         "id":1,
-         "name":"Digitex Token",
-         "symbol":"DGTX",
-         "type":"token",
-         "precision":4,
          "hasDeposit":false,
          "hasWithdraw":false,
          "depositFee":0,
