@@ -21,6 +21,8 @@ And in case of error response would be like:
 }
 ```
 
+**Note:** the error will also be returned in case of system maintenance and absence of data for the response. 
+
 ### Endpoints
 
 #### Public - Contracts
@@ -460,4 +462,15 @@ And in case of error response would be like:
 ```
 
 ------
+
+#### Error codes
+
+| Code | Description                            |
+| ---- | -------------------------------------- |
+| 3001 | Bad Request (invalid parameters, etc.) |
+| 3003 | Contract not found                     |
+| 3004 | Index not found                        |
+| 3006 | Kline interval not found               |
+| 3011 | Feature is not implemented yet         |
+| 4001 | System maintenance                     |
 
