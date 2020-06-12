@@ -2,9 +2,6 @@
 
 ## Market Data API
 
-*REST API URL* https://rest-api.sandbox.digitex.fun 
-*WS API URL* wss://ws-api.sandbox.digitex.fun
-
 *NOTE* This is *ALPHA-VERSION* of API. In future versions of API could be incompatible changes.
 
 Every response has the following structure in case of success. Field `data` could be either an object or an array.
@@ -29,6 +26,10 @@ And in case of error response would be like:
 **Note:** the error will also be returned in case of system maintenance and absence of data for the response. 
 
 ### Endpoints
+
+*REST API URL* https://rest-api.sandbox.digitex.fun 
+
+*WS API URL* wss://ws-api.sandbox.digitex.fun
 
 #### Public - Contracts
 
