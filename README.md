@@ -49,7 +49,7 @@ And in case of error response would be like:
             "name":"BTC/USD-PERP",
             "symbol":"BTCUSD-PERP",
             "type":"perpetual_futures",
-            "tradable":true,
+            "isTradable":true,
             "baseCurrency":"BTC",
             "quoteCurrency":"USD",
             "pnlCurrency":"DGTX",
