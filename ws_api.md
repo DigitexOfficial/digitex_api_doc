@@ -269,7 +269,7 @@ Message
         "indexSymbol":".DGTXBTCUSD",
         "ts":1590999736783,
         "markPx":9549,
-        "fairPx":9548,
+        "fairPx":9549,
         "spotPx":9565,
         "components":{
             "binance":{"weight":25,"ts":0,"px":0,"vol":0},

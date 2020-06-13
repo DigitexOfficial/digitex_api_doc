@@ -446,7 +446,7 @@ And in case of error response would be like:
             "contracts":["BTCUSD-PERP"],
             "updated":1590999736783,
             "markPx":9549.4469,
-            "fairPx":0,
+            "fairPx":9549.4469,
             "spotPx":0,
             "components":{
                 "binance":{
