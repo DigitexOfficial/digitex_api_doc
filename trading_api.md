@@ -125,7 +125,7 @@ List of objects, each has the following fields:
 
 | Parameter name | Parameter type | Description                       |
 | -------------- | -------------- | --------------------------------- |
-| symbol         | string         |                                   |
+| symbol         | string         | e.g. 'BTCUSD-PERP'                |
 | oldClOrdId     | string         | `clOrdId` of the original order   |
 | clOrdId        | string         | assigned by the trader            |
 | ordType        | string         | `MARKET`/`LIMIT`                  |
@@ -184,7 +184,7 @@ General response with `ok` or `error`.
 
 ------
 
-#### Close contract
+#### Close contract (the same as close position?)
 
 **Request**
 
@@ -192,7 +192,7 @@ General response with `ok` or `error`.
 
 | Parameter name | Parameter type | Description                         |
 | -------------- | -------------- | ----------------------------------- |
-| contractId     | uint64         |                                     |
+| contractId     | uint64         | what is `contractID`???             |
 | ordType        | string         | `MARKET`/`LIMIT`                    |
 | px             | float          | `px` is the price for `LIMIT` order |
 | qty            | float          | `0` or omit to fully close          |
@@ -207,11 +207,23 @@ General response with `ok` or `error`.
 
 **Request**
 
-
+`GET /api/v1/private/wallet/balances`
 
 **Response**
 
-
+```json
+{
+    "status": "ok",
+    "data": [
+        {
+            "currency": "DGTX",
+            "balance": 100000,
+            "orderMargin": 5000,
+            "positionMargin": 3000
+        }
+    ]
+}
+```
 
 ------
 
@@ -219,35 +231,34 @@ General response with `ok` or `error`.
 
 **Request**
 
-
-
-**Response**
-
-
-
-------
-
-#### Close position
-
-**Request**
-
-
+`GET /api/v1/private/positions`
 
 **Response**
 
-
-
-------
-
-#### Get PNL
-
-**Request**
-
-
-
-**Response**
-
-
+```json
+{
+    "status": "ok",
+    "data": [
+        {
+            "symbol": "BTCUSD-PERP",
+            "type": "long/short",
+            "pnl": 50,
+            "upnl": 10,
+            "contracts": 500,
+            "volume": 10000,
+            "liquidationVolume": 500,
+            "bankruptcyVolume": 500,
+            "lastTradePx": 9800,
+            "lastTradeQty": 50,
+            "buy_order_margin": 10,
+            "buy_order_quantity": 1,
+            "sell_order_margin": 10,
+            "sell_order_quantity": 2,
+            "mark_price": 9950,
+        }
+    ]
+}
+```
 
 ------
 
@@ -255,11 +266,18 @@ General response with `ok` or `error`.
 
 **Request**
 
+`POST /api/v1/private/transfer`
 
+| Parameter name | Parameter type | Description |
+| -------------- | -------------- | ----------- |
+| fromWallet     | string         |             |
+| toWallet       | string         |             |
+| currency       | string         |             |
+| amount         | float          |             |
 
 **Response**
 
-
+General response with `ok` or `error`.
 
 ------
 
@@ -267,35 +285,91 @@ General response with `ok` or `error`.
 
 **Request**
 
+`POST /api/v1/wallet/withdrawal`
 
+| Parameter name | Parameter type | Description |
+| -------------- | -------------- | ----------- |
+| wallet         | string         |             |
+| currency       | string         |             |
+| amount         | float          |             |
+| address        | string         |             |
 
 **Response**
 
-
+General response with `ok` or `error`.
 
 ------
 
-#### Trades
+#### Trade History
 
 **Request**
 
+`GET /api/v1/private/trades/history`
 
+| Parameter name | Parameter type | Description           |
+| -------------- | -------------- | --------------------- |
+| symbol         | string         | e.g. 'BTCUSD-PERP'    |
+| from           | int64          | Timestamp             |
+| to             | int64          | Timestamp             |
+| limit          | int64          | Default: 10. Max: 100 |
 
 **Response**
 
-
+```json
+{
+    "status": "ok",
+    "data": [
+        {
+            "id": 1234567,
+            "ts": 123456789000,
+            "symbol": "BTCUSD-PERP",
+            "ordId": "123456",
+            "side": "BUY/SELL",
+            "px": 9600,
+            "qty": 100,
+            "ordPx": 9600,
+            "ordType": "MARKET/LIMIT",
+            "maker": true/false
+        }
+    ]
+}
+```
 
 ------
 
-#### Fills
+#### Fill History
 
 **Request**
 
+`GET /api/v1/private/fills/history`
 
+| Parameter name | Parameter type | Description           |
+| -------------- | -------------- | --------------------- |
+| symbol         | string         | e.g. 'BTCUSD-PERP'    |
+| from           | int64          | Timestamp             |
+| to             | int64          | Timestamp             |
+| limit          | int64          | Default: 10. Max: 100 |
 
 **Response**
 
-
+```json
+{
+    "status": "ok",
+    "data": [
+        {
+            "symbol": "BTCUSD-PERP",
+            "createdAt": 123456789000,
+            "ordId": "1234",
+            "clOrdId": "qwerty",
+            "side": "BUY/SELL",
+            "ordPx": 9500,
+            "fillId": "12345",
+            "fillPx": 9500,
+            "fillQty": 100
+        }
+    ]
+}
+```
 
 ------
 
