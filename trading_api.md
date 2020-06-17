@@ -224,9 +224,47 @@ General response with `ok` or `error`.
 
 ------
 
+#### Get positions
+
+**Request**
+
+`GET /api/v1/private/positions`
+
+**Response**
+
+```json
+{
+    "status": "ok",
+    "data": [
+        {
+            "id": 1254789,
+            "symbol": "BTCUSD-PERP",
+            "type": "long/short",
+            "openTime": 124578957000,
+            "entryPx": 9550,
+            "qty": 500,
+            "volume": 10000,
+            "pnl": 50,
+            "upnl": 10,
+            "liquidationVolume": 5000,
+            "bankruptcyVolume": 5000,
+            "lastTradePx": 9800,
+            "lastTradeQty": 50,
+            "buy_order_margin": 10,
+            "buy_order_quantity": 1,
+            "sell_order_margin": 10,
+            "sell_order_quantity": 2,
+            "mark_price": 9950,
+        }
+    ]
+}
+```
+
+------
+
 #### Close contract
 
-You can cancel one or all contracts (if `contractId` is omitted).
+You can close single or all contracts (if `contractId` is omitted).
 
 **Request**
 
@@ -270,41 +308,6 @@ There are several kinds of wallets: `exchange`(main), `trading`.
             "balance": 5000,
             "orderMargin": 2000,
             "positionMargin": 2000
-        }
-    ]
-}
-```
-
-------
-
-#### Get positions
-
-**Request**
-
-`GET /api/v1/private/positions`
-
-**Response**
-
-```json
-{
-    "status": "ok",
-    "data": [
-        {
-            "symbol": "BTCUSD-PERP",
-            "type": "long/short",
-            "pnl": 50,
-            "upnl": 10,
-            "contracts": 500,
-            "volume": 10000,
-            "liquidationVolume": 5000,
-            "bankruptcyVolume": 5000,
-            "lastTradePx": 9800,
-            "lastTradeQty": 50,
-            "buy_order_margin": 10,
-            "buy_order_quantity": 1,
-            "sell_order_margin": 10,
-            "sell_order_quantity": 2,
-            "mark_price": 9950,
         }
     ]
 }
