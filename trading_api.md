@@ -33,7 +33,7 @@ Possible value of order's `status`: `UNDEFINED`, `PENDING`, `ACCEPTED`, `REJECTE
 
 **Request**
 
-`POST /api/v1/private/order`
+`POST /api/v1/private/order/place`
 
 | Parameter name | Parameter type | Description                       |
 | -------------- | -------------- | --------------------------------- |
@@ -166,7 +166,7 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 **Request**
 
-`PATCH /api/v1/private/order`
+`POST /api/v1/private/order/update`
 
 | Parameter name | Parameter type | Description                             |
 | -------------- | -------------- | --------------------------------------- |
@@ -193,7 +193,7 @@ You can cancel the order by using a Client Order ID (`clOrdId`) of a placed orde
 
 **Request**
 
-`DELETE /api/v1/private/order`
+`POST /api/v1/private/order/cancel`
 
 | Parameter name | Parameter type | Description            |
 | -------------- | -------------- | ---------------------- |
@@ -211,7 +211,7 @@ Trader can cancel all the orders (`side` and `px` are omitted) or just orders wi
 
 **Request**
 
-`DELETE /api/v1/private/orders`
+`POST /api/v1/private/orders/cancel`
 
 | Parameter name | Parameter type | Description            |
 | -------------- | -------------- | ---------------------- |
@@ -228,7 +228,7 @@ General response with `ok` or `error`.
 
 **Request**
 
-`DELETE /api/v1/private/contract`
+`POST /api/v1/private/contract/close`
 
 | Parameter name | Parameter type | Description                         |
 | -------------- | -------------- | ----------------------------------- |
