@@ -1,6 +1,6 @@
 # Trading API Draft
 
-*<u>Note:</u> for each private request authentification is required.*
+*<u>Note:</u> for each private request authentication is required.*
 
 #### General
 
@@ -25,6 +25,8 @@ And in case of error response would be like:
 
 <u>Note</u>: the error will also be returned in case of system maintenance and absence of data for the response. 
 
+Possible value of order's `status`: `UNDEFINED`, `PENDING`, `ACCEPTED`, `REJECTED`, `CANCELED`, `FILLED`, `PARTIAL`, `TERMINATED`, `EXPIRED`, `TRIGGERED`.
+
 ------
 
 #### Place order
@@ -47,10 +49,26 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 **Response**
 
-| Parameter name | Parameter type | Description            |
-| -------------- | -------------- | ---------------------- |
-| ordId          | string         | assigned by the API    |
-| clOrdId        | string         | provided by the trader |
+```json
+{
+    "status": "ok",
+    "data": {
+        "symbol": "BTCUSD-PERP",
+        "clOrdId": "123456",
+        "status": "PENDING",
+        "createdAt": 1592381206000,
+        "updatedAt": 1592381206000,
+        "ordType": "LIMIT",
+        "timeInForce": "GTC",
+        "side": "BUY",
+        "px": 9200,
+        "avgPx": 0,
+        "qty": 100,
+        "filledQty": 0,
+        "unfilledQty": 100
+    }
+}
+```
 
 ------
 
@@ -67,21 +85,28 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 **Response**
 
-| Parameter name        | Parameter type | Description                                                  |
-| --------------------- | -------------- | ------------------------------------------------------------ |
-| symbol                | string         | e.g. 'BTCUSD-PERP'                                           |
-| ordId                 | string         | assigned by the API                                          |
-| clOrdId               | string         | assigned by the trader                                       |
-| createdAt             | int64          | Timestamp                                                    |
-| updatedAt             | int64          | Timestamp                                                    |
-| ordType               | string         | `MARKET`/`LIMIT`                                             |
-| timeInForce           | string         | `GTD`, `GTC`, `GTF`, `IOC`, `FOK`                            |
-| side                  | string         | `BUY`/`SELL`                                                 |
-| px                    | float          | not required if type is `MARKET`                             |
-| qty                   | float          |                                                              |
-| status                | string         | `UNDEFINED`, `PENDING`, `ACCEPTED`, `REJECTED`, `CANCELED`, `FILLED`, `PARTIAL`, `TERMINATED`, `EXPIRED`, `TRIGGERED` |
-| filledQty/cumQty      | float          | total quantity filled                                        |
-| unfilledQty/leavesQty | float          | unfilled order quantity                                      |
+```json
+{
+    "status": "ok",
+    "data": {
+        "symbol": "BTCUSD-PERP",
+        "clOrdId": "123456",
+        "status": "FILLED",
+        "createdAt": 1592381206000,
+        "updatedAt": 1592381785000,
+        "ordType": "LIMIT",
+        "timeInForce": "GTC",
+        "side": "BUY",
+        "px": 9200,
+        "avgPx": 9200,
+        "qty": 100,
+        "filledQty": 100,
+        "unfilledQty": 0
+    }
+}
+```
+
+
 
 ------
 
@@ -97,23 +122,43 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 **Response**
 
-List of objects, each has the following fields:
-
-| Parameter name | Parameter type | Description                                                  |
-| -------------- | -------------- | ------------------------------------------------------------ |
-| symbol         | string         | e.g. 'BTCUSD-PERP'                                           |
-| ordId          | string         | assigned by the API                                          |
-| clOrdId        | string         | assigned by the trader                                       |
-| createdAt      | int64          | Timestamp                                                    |
-| updatedAt      | int64          | Timestamp                                                    |
-| ordType        | string         | `MARKET`/`LIMIT`                                             |
-| timeInForce    | string         | `GTD`, `GTC`, `GTF`, `IOC`, `FOK`                            |
-| side           | string         | `BUY`/`SELL`                                                 |
-| px             | float          | not required if type is `MARKET`                             |
-| qty            | float          |                                                              |
-| status         | string         | `UNDEFINED`, `PENDING`, `ACCEPTED`, `REJECTED`, `CANCELED`, `FILLED`, `PARTIAL`, `TERMINATED`, `EXPIRED`, `TRIGGERED` |
-| filledQty      | float          | total quantity filled                                        |
-| avgPx          | float          | average price of all order fills                             |
+```json
+{
+    "status": "ok",
+    "data": [
+        {
+            "symbol": "BTCUSD-PERP",
+            "clOrdId": "45622358",
+            "status": "ACCEPTED",
+            "createdAt": 1592382086000,
+            "updatedAt": 1592382086000,
+            "ordType": "LIMIT",
+            "timeInForce": "GTC",
+            "side": "BUY",
+            "px": 9200,
+            "avgPx": 0,
+            "qty": 100,
+            "filledQty": 0,
+            "unfilledQty": 100
+        },
+        {
+            "symbol": "BTCUSD-PERP",
+            "clOrdId": "1256987",
+            "status": "ACCEPTED",
+            "createdAt": 1592382180000,
+            "updatedAt": 1592382180000,
+            "ordType": "LIMIT",
+            "timeInForce": "GTC",
+            "side": "SELL",
+            "px": 9400,
+            "avgPx": 0,
+            "qty": 100,
+            "filledQty": 0,
+            "unfilledQty": 100
+        }
+    ]
+}
+```
 
 ------
 
@@ -123,33 +168,28 @@ List of objects, each has the following fields:
 
 `PATCH /api/v1/private/order`
 
-| Parameter name | Parameter type | Description                       |
-| -------------- | -------------- | --------------------------------- |
-| symbol         | string         | e.g. 'BTCUSD-PERP'                |
-| oldClOrdId     | string         | `clOrdId` of the original order   |
-| clOrdId        | string         | assigned by the trader            |
-| ordType        | string         | `MARKET`/`LIMIT`                  |
-| timeInForce    | string         | `GTD`, `GTC`, `GTF`,` IOC`, `FOK` |
-| side           | string         | `BUY`/`SELL`                      |
-| px             | float          | not required if type is `MARKET`  |
-| qty            | float          |                                   |
+| Parameter name | Parameter type | Description                             |
+| -------------- | -------------- | --------------------------------------- |
+| symbol         | string         | e.g. 'BTCUSD-PERP'                      |
+| oldClOrdId     | string         | `clOrdId` of the original order         |
+| clOrdId        | string         | assigned by the trader (new order's ID) |
+| ordType        | string         | `MARKET`/`LIMIT`                        |
+| timeInForce    | string         | `GTD`, `GTC`, `GTF`,` IOC`, `FOK`       |
+| side           | string         | `BUY`/`SELL`                            |
+| px             | float          | not required if type is `MARKET`        |
+| qty            | float          |                                         |
 
 For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` positive and <u>integral</u>.
 
 **Response**
 
-| Parameter name | Parameter type | Description            |
-| -------------- | -------------- | ---------------------- |
-| ordId          | string         | assigned by the API    |
-| clOrdId        | string         | provided by the trader |
-
-`ordId` and `clOrdId` are identificators of the new order.
+General response with `ok` or `error`.
 
 ------
 
 #### Cancel order
 
-You can cancel the order by the Internal Order ID (`ordId`) or using a Client Order ID (`clOrdId`).
+You can cancel the order by using a Client Order ID (`clOrdId`) of a placed order.
 
 **Request**
 
@@ -157,7 +197,6 @@ You can cancel the order by the Internal Order ID (`ordId`) or using a Client Or
 
 | Parameter name | Parameter type | Description            |
 | -------------- | -------------- | ---------------------- |
-| ordId          | string         | assigned by the API    |
 | clOrdId        | string         | provided by the trader |
 
 **Response**
@@ -168,7 +207,7 @@ General response with `ok` or `error`.
 
 #### Cancel orders
 
-Trader can cancel all the orders (`side` is omited) or just orders with the specified `side` .
+Trader can cancel all the orders (`side` is omitted) or just orders with the specified `side` .
 
 **Request**
 
@@ -192,7 +231,7 @@ General response with `ok` or `error`.
 
 | Parameter name | Parameter type | Description                         |
 | -------------- | -------------- | ----------------------------------- |
-| contractId     | uint64         | what is `contractID`???             |
+| contractId     | uint64         |                                     |
 | ordType        | string         | `MARKET`/`LIMIT`                    |
 | px             | float          | `px` is the price for `LIMIT` order |
 | qty            | float          | `0` or omit to fully close          |
