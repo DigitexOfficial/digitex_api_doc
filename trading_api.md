@@ -207,7 +207,7 @@ General response with `ok` or `error`.
 
 #### Cancel orders
 
-Trader can cancel all the orders (`side` is omitted) or just orders with the specified `side` .
+Trader can cancel all the orders (`side` and `px` are omitted) or just orders with the specified `side`  and/or `px`.
 
 **Request**
 
@@ -216,6 +216,7 @@ Trader can cancel all the orders (`side` is omitted) or just orders with the spe
 | Parameter name | Parameter type | Description            |
 | -------------- | -------------- | ---------------------- |
 | side           | string         | `BUY`/`SELL`; optional |
+| px             | float          |                        |
 
 **Response**
 
