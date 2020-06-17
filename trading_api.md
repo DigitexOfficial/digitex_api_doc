@@ -224,7 +224,9 @@ General response with `ok` or `error`.
 
 ------
 
-#### Close contract (the same as close position?)
+#### Close contract
+
+You can cancel one or all contracts (if `contractId` is omitted).
 
 **Request**
 
@@ -232,7 +234,7 @@ General response with `ok` or `error`.
 
 | Parameter name | Parameter type | Description                         |
 | -------------- | -------------- | ----------------------------------- |
-| contractId     | uint64         |                                     |
+| contractId     | uint64         | *optional*                          |
 | ordType        | string         | `MARKET`/`LIMIT`                    |
 | px             | float          | `px` is the price for `LIMIT` order |
 | qty            | float          | `0` or omit to fully close          |
