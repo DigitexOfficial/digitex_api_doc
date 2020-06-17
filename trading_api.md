@@ -247,6 +247,8 @@ General response with `ok` or `error`.
 
 #### Get trader balance
 
+There are several kinds of wallets: `exchange`(main), `trading`.
+
 **Request**
 
 `GET /api/v1/private/wallet/balances`
@@ -258,10 +260,16 @@ General response with `ok` or `error`.
     "status": "ok",
     "data": [
         {
+            "walletType": "exchange",
             "currency": "DGTX",
             "balance": 100000,
-            "orderMargin": 5000,
-            "positionMargin": 3000
+        },
+        {
+            "walletType": "trading",
+            "currency": "DGTX",
+            "balance": 5000,
+            "orderMargin": 2000,
+            "positionMargin": 2000
         }
     ]
 }
@@ -288,8 +296,8 @@ General response with `ok` or `error`.
             "upnl": 10,
             "contracts": 500,
             "volume": 10000,
-            "liquidationVolume": 500,
-            "bankruptcyVolume": 500,
+            "liquidationVolume": 5000,
+            "bankruptcyVolume": 5000,
             "lastTradePx": 9800,
             "lastTradeQty": 50,
             "buy_order_margin": 10,
@@ -310,12 +318,12 @@ General response with `ok` or `error`.
 
 `POST /api/v1/private/transfer`
 
-| Parameter name | Parameter type | Description |
-| -------------- | -------------- | ----------- |
-| fromWallet     | string         |             |
-| toWallet       | string         |             |
-| currency       | string         |             |
-| amount         | float          |             |
+| Parameter name | Parameter type | Description                            |
+| -------------- | -------------- | -------------------------------------- |
+| fromWallet     | string         | kind of wallet (`exchange`, `trading`) |
+| toWallet       | string         | kind of wallet (`exchange`, `trading`) |
+| currency       | string         |                                        |
+| amount         | float          |                                        |
 
 **Response**
 
@@ -327,18 +335,35 @@ General response with `ok` or `error`.
 
 **Request**
 
-`POST /api/v1/wallet/withdrawal`
+`POST /api/v1/private/wallet/withdraw`
 
-| Parameter name | Parameter type | Description |
-| -------------- | -------------- | ----------- |
-| wallet         | string         |             |
-| currency       | string         |             |
-| amount         | float          |             |
-| address        | string         |             |
+| Parameter name | Parameter type | Description                            |
+| -------------- | -------------- | -------------------------------------- |
+| wallet         | string         | kind of wallet (`exchange`, `trading`) |
+| method         | string         | `eth`,`btc`, `xrp`                     |
+| amount         | float          |                                        |
+| address        | string         | e.g. 0x25b78frd4...8n                  |
+| priority       | string         | `low`, `mid`, `high`                   |
 
 **Response**
 
-General response with `ok` or `error`.
+```json
+{
+    "status": "ok",
+    "data": {
+        "withdrawalId": 123456,
+        "createdAt": 1592397360000,
+        "updatedAt": 1592397360000,
+        "method": "eth",
+        "address": "0x25b78frd4...8n",
+        "priority": "mid",
+        "fee": 0.05,
+        "state": "PENDING"
+    }
+}
+```
+
+Possible withdrawal state: `PENDING`, `CONFIRMED`, `CANCELLED`, `REJECTED`, `COMPLETED`.
 
 ------
 
@@ -365,13 +390,8 @@ General response with `ok` or `error`.
             "id": 1234567,
             "ts": 123456789000,
             "symbol": "BTCUSD-PERP",
-            "ordId": "123456",
-            "side": "BUY/SELL",
             "px": 9600,
             "qty": 100,
-            "ordPx": 9600,
-            "ordType": "MARKET/LIMIT",
-            "maker": true/false
         }
     ]
 }
@@ -401,7 +421,6 @@ General response with `ok` or `error`.
         {
             "symbol": "BTCUSD-PERP",
             "createdAt": 123456789000,
-            "ordId": "1234",
             "clOrdId": "qwerty",
             "side": "BUY/SELL",
             "ordPx": 9500,
