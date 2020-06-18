@@ -282,7 +282,7 @@ General response with `ok` or `error`.
 
 #### Get trader balance
 
-There are several kinds of wallets: `exchange`(main), `trading`.
+There are several kinds of wallets: `MAIN`, `TRADING`.
 
 **Request**
 
@@ -295,12 +295,12 @@ There are several kinds of wallets: `exchange`(main), `trading`.
     "status": "ok",
     "data": [
         {
-            "walletType": "exchange",
+            "walletType": "MAIN",
             "currency": "DGTX",
             "balance": 100000,
         },
         {
-            "walletType": "trading",
+            "walletType": "TRADING",
             "currency": "DGTX",
             "balance": 5000,
             "orderMargin": 2000,
@@ -318,16 +318,32 @@ There are several kinds of wallets: `exchange`(main), `trading`.
 
 `POST /api/v1/private/wallet/transfer`
 
-| Parameter name | Parameter type | Description                            |
-| -------------- | -------------- | -------------------------------------- |
-| fromWallet     | string         | kind of wallet (`exchange`, `trading`) |
-| toWallet       | string         | kind of wallet (`exchange`, `trading`) |
-| currency       | string         | `DGTX`                                 |
-| amount         | float          | desired amount of contracts            |
+| Parameter name | Parameter type | Description                        |
+| -------------- | -------------- | ---------------------------------- |
+| fromWallet     | string         | kind of wallet (`MAIN`, `TRADING`) |
+| toWallet       | string         | kind of wallet (`MAIN`, `TRADING`) |
+| currency       | string         | `DGTX`                             |
+| amount         | float          | desired amount                     |
 
 **Response**
 
-General response with `ok` or `error`.
+```json
+{
+    "status": "ok",
+    "data": {
+        "id": 125468,
+        "createdAt": 1592484229000,
+        "updatedAt": 1592484229000,
+        "status": "CREATED",
+        "fromWallet": "TRADING",
+        "toWallet": "MAIN",
+        "amount": 10000,
+        "currency": "DGTX"
+    }
+}
+```
+
+Possible values of transfer `status`: `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`.
 
 ------
 
@@ -337,13 +353,14 @@ General response with `ok` or `error`.
 
 `POST /api/v1/private/wallet/withdraw`
 
-| Parameter name | Parameter type | Description                            |
-| -------------- | -------------- | -------------------------------------- |
-| wallet         | string         | kind of wallet (`exchange`, `trading`) |
-| method         | string         | `ETH`,`BTC`, `XRP`                     |
-| amount         | float          | desired amount                         |
-| address        | string         | e.g. 0x25b78frd4...8n                  |
-| priority       | string         | `low`, `mid`, `high`. Default: `mid`.  |
+| Parameter name | Parameter type | Description                           |
+| -------------- | -------------- | ------------------------------------- |
+| wallet         | string         | kind of wallet (`MAIN`, `TRADING`)    |
+| method         | string         | `ETH`,`BTC`, `XRP`                    |
+| amount         | float          | desired amount                        |
+| address        | string         | e.g. 0x25b78frd4...8n                 |
+| priority       | string         | `low`, `mid`, `high`. Default: `mid`. |
+| message        | string         | arbitrary text                        |
 
 **Response**
 
@@ -352,18 +369,20 @@ General response with `ok` or `error`.
     "status": "ok",
     "data": {
         "withdrawalId": 123456,
+        "wallet": "MAIN",
         "createdAt": 1592397360000,
         "updatedAt": 1592397360000,
         "method": "ETH",
         "address": "0x25b78frd4...8n",
         "priority": "mid",
         "fee": 0.05,
-        "state": "PENDING"
+        "status": "PENDING",
+        "message": "from DIGITEX with love"
     }
 }
 ```
 
-Possible withdrawal state: `PENDING`, `CONFIRMED`, `CANCELLED`, `REJECTED`, `COMPLETED`.
+Possible withdrawal `status`:  `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`, `DECLINED`, `CANCELED`.
 
 ------
 
