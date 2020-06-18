@@ -43,7 +43,7 @@ Possible value of order's `status`: `UNDEFINED`, `PENDING`, `ACCEPTED`, `REJECTE
 | timeInForce    | string         | `GTD`, `GTC`, `GTF`, `IOC`, `FOK` |
 | side           | string         | `BUY`/`SELL`                      |
 | px             | float          | not required if type is `MARKET`  |
-| qty            | float          |                                   |
+| qty            | float          | desired amount of contracts       |
 
 For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` positive and <u>integral</u>.
 
@@ -176,7 +176,7 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 | timeInForce    | string         | `GTD`, `GTC`, `GTF`,` IOC`, `FOK`            |
 | side           | string         | `BUY`/`SELL`                                 |
 | px             | float          | not required if type is `MARKET`; *optional* |
-| qty            | float          |                                              |
+| qty            | float          | desired amount of contracts                  |
 
 For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` positive and <u>integral</u>.
 
@@ -323,7 +323,7 @@ There are several kinds of wallets: `exchange`(main), `trading`.
 | fromWallet     | string         | kind of wallet (`exchange`, `trading`) |
 | toWallet       | string         | kind of wallet (`exchange`, `trading`) |
 | currency       | string         | `DGTX`                                 |
-| amount         | float          |                                        |
+| amount         | float          | desired amount of contracts            |
 
 **Response**
 
