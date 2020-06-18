@@ -80,7 +80,6 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 | Parameter name | Parameter type | Description            |
 | -------------- | -------------- | ---------------------- |
-| ordId          | string         | assigned by the API    |
 | clOrdId        | string         | provided by the trader |
 
 **Response**
@@ -116,9 +115,9 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 `GET /api/v1/private/orders/active`
 
-| Parameter name | Parameter type | Description                  |
-| -------------- | -------------- | ---------------------------- |
-| symbol         | string         | e.g. 'BTCUSD-PERP'; optional |
+| Parameter name | Parameter type | Description                    |
+| -------------- | -------------- | ------------------------------ |
+| symbol         | string         | e.g. 'BTCUSD-PERP'; *optional* |
 
 **Response**
 
@@ -168,16 +167,16 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 `POST /api/v1/private/order/update`
 
-| Parameter name | Parameter type | Description                             |
-| -------------- | -------------- | --------------------------------------- |
-| symbol         | string         | e.g. 'BTCUSD-PERP'                      |
-| oldClOrdId     | string         | `clOrdId` of the original order         |
-| clOrdId        | string         | assigned by the trader (new order's ID) |
-| ordType        | string         | `MARKET`/`LIMIT`                        |
-| timeInForce    | string         | `GTD`, `GTC`, `GTF`,` IOC`, `FOK`       |
-| side           | string         | `BUY`/`SELL`                            |
-| px             | float          | not required if type is `MARKET`        |
-| qty            | float          |                                         |
+| Parameter name | Parameter type | Description                                  |
+| -------------- | -------------- | -------------------------------------------- |
+| symbol         | string         | e.g. 'BTCUSD-PERP'                           |
+| oldClOrdId     | string         | `clOrdId` of the original order              |
+| clOrdId        | string         | assigned by the trader (new order's ID)      |
+| ordType        | string         | `MARKET`/`LIMIT`                             |
+| timeInForce    | string         | `GTD`, `GTC`, `GTF`,` IOC`, `FOK`            |
+| side           | string         | `BUY`/`SELL`                                 |
+| px             | float          | not required if type is `MARKET`; *optional* |
+| qty            | float          |                                              |
 
 For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` positive and <u>integral</u>.
 
@@ -213,10 +212,10 @@ Trader can cancel all the orders (`side` and `px` are omitted) or just orders wi
 
 `POST /api/v1/private/orders/cancel`
 
-| Parameter name | Parameter type | Description            |
-| -------------- | -------------- | ---------------------- |
-| side           | string         | `BUY`/`SELL`; optional |
-| px             | float          |                        |
+| Parameter name | Parameter type | Description              |
+| -------------- | -------------- | ------------------------ |
+| side           | string         | `BUY`/`SELL`; *optional* |
+| px             | float          | *optional*               |
 
 **Response**
 
@@ -239,21 +238,19 @@ General response with `ok` or `error`.
         {
             "id": 1254789,
             "symbol": "BTCUSD-PERP",
-            "type": "long/short",
+            "type": "LONG/SHORT",
             "openTime": 124578957000,
             "entryPx": 9550,
-            "qty": 500,
-            "volume": 10000,
+            "qty": 50,
+            "margin": 9550,
+            "liquidationPx": 14180,
+            "leverage": 1,
             "pnl": 50,
             "upnl": 10,
-            "liquidationVolume": 5000,
-            "bankruptcyVolume": 5000,
+            "liquidationVolume": 0,
+            "bankruptcyVolume": 0,
             "lastTradePx": 9800,
             "lastTradeQty": 50,
-            "buy_order_margin": 10,
-            "buy_order_quantity": 1,
-            "sell_order_margin": 10,
-            "sell_order_quantity": 2,
             "mark_price": 9950,
         }
     ]
@@ -262,17 +259,17 @@ General response with `ok` or `error`.
 
 ------
 
-#### Close contract
+#### Close position
 
-You can close single or all contracts (if `contractId` is omitted).
+You can close a single position or all positions (if `positionId` is omitted).
 
 **Request**
 
-`POST /api/v1/private/contract/close`
+`POST /api/v1/private/positions/close`
 
 | Parameter name | Parameter type | Description                         |
 | -------------- | -------------- | ----------------------------------- |
-| contractId     | uint64         | *optional*                          |
+| positionId     | uint64         | *optional*                          |
 | ordType        | string         | `MARKET`/`LIMIT`                    |
 | px             | float          | `px` is the price for `LIMIT` order |
 | qty            | float          | `0` or omit to fully close          |
@@ -319,13 +316,13 @@ There are several kinds of wallets: `exchange`(main), `trading`.
 
 **Request**
 
-`POST /api/v1/private/transfer`
+`POST /api/v1/private/wallet/transfer`
 
 | Parameter name | Parameter type | Description                            |
 | -------------- | -------------- | -------------------------------------- |
 | fromWallet     | string         | kind of wallet (`exchange`, `trading`) |
 | toWallet       | string         | kind of wallet (`exchange`, `trading`) |
-| currency       | string         |                                        |
+| currency       | string         | `DGTX`                                 |
 | amount         | float          |                                        |
 
 **Response**
@@ -343,10 +340,10 @@ General response with `ok` or `error`.
 | Parameter name | Parameter type | Description                            |
 | -------------- | -------------- | -------------------------------------- |
 | wallet         | string         | kind of wallet (`exchange`, `trading`) |
-| method         | string         | `eth`,`btc`, `xrp`                     |
-| amount         | float          |                                        |
+| method         | string         | `ETH`,`BTC`, `XRP`                     |
+| amount         | float          | desired amount                         |
 | address        | string         | e.g. 0x25b78frd4...8n                  |
-| priority       | string         | `low`, `mid`, `high`                   |
+| priority       | string         | `low`, `mid`, `high`. Default: `mid`.  |
 
 **Response**
 
@@ -357,7 +354,7 @@ General response with `ok` or `error`.
         "withdrawalId": 123456,
         "createdAt": 1592397360000,
         "updatedAt": 1592397360000,
-        "method": "eth",
+        "method": "ETH",
         "address": "0x25b78frd4...8n",
         "priority": "mid",
         "fee": 0.05,
@@ -370,7 +367,7 @@ Possible withdrawal state: `PENDING`, `CONFIRMED`, `CANCELLED`, `REJECTED`, `COM
 
 ------
 
-#### Trade History
+#### Trade history
 
 **Request**
 
@@ -402,7 +399,7 @@ Possible withdrawal state: `PENDING`, `CONFIRMED`, `CANCELLED`, `REJECTED`, `COM
 
 ------
 
-#### Fill History
+#### Fill history
 
 **Request**
 
