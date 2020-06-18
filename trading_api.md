@@ -251,7 +251,7 @@ General response with `ok` or `error`.
             "bankruptcyVolume": 0,
             "lastTradePx": 9800,
             "lastTradeQty": 50,
-            "mark_price": 9950,
+            "markPx": 9950,
         }
     ]
 }
