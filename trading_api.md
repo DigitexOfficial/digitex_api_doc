@@ -76,7 +76,7 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 **Request**
 
-`GET /api/v1/private/order`
+`GET /api/v1/private/order/status`
 
 | Parameter name | Parameter type | Description            |
 | -------------- | -------------- | ---------------------- |
