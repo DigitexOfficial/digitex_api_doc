@@ -784,7 +784,7 @@ Possible values of position `type`: `LONG`, `SHORT`.
 }
 ```
 
-`openTime` is timestamp in milliseconds.
+`openTime` is a timestamp in milliseconds.
 
 ------
 
@@ -913,6 +913,10 @@ You can transfer certain `amount` of `currency` (`DGTX`) between `fromWallet` an
     }
 }
 ```
+
+Possible values of transfer `status`: `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`.
+
+`createdAt` and `updatedAt` are timestamps in milliseconds.
 
 ------
 
@@ -1054,7 +1058,7 @@ Maximum value of `limit`: 100.
 
 ------
 
-### Subscriptions
+### SUBSCRIPTIONS
 
 ------
 
@@ -1072,19 +1076,21 @@ Maximum value of `limit`: 100.
 
 #### Pnl/UPnL channel
 
-**Channel name:** `<symbol>@pnl`.
+**Channel name:** `private@pnl`.
 
-Message
+Published message:
 
 ```json
 {
     "ch": "pnl",
-    "data": {
-        "symbol":"BTCUSD-PERP",
-        "ts": 1591295037813,
-        "pnl": 50,
-        "upnl": 3
-    }
+    "data": [
+        {
+            "symbol":"BTCUSD-PERP",
+            "ts": 1591295037813,
+            "pnl": 50,
+            "upnl": 3
+        }
+    ]
 }
 ```
 
@@ -1092,7 +1098,9 @@ Message
 
 #### Trading balance channel
 
-Channel name: `private@tradingbalance`.
+**Channel name:** `private@tradingbalance`.
+
+Published message:
 
 ```json
 {
@@ -1101,6 +1109,134 @@ Channel name: `private@tradingbalance`.
         "currency": "DGTX",
         "balance": 10000,
         "availableBalance": 5000
+    }
+}
+```
+
+------
+
+#### Deposits channel
+
+**Channel name:** `private@deposits`.
+
+Published message:
+
+```json
+{
+    "ch": "deposits",
+    "data": {
+        "ts": 1592939551000,
+        "wallet": "MAIN",
+        "amount": 5000,
+        "currency": "DGTX"
+    }
+}
+```
+
+------
+
+#### Withdrawals channel
+
+**Channel name:** `private@withdrawals`.
+
+Published message:
+
+```json
+{
+    "ch": "withdrawals",
+    "data": {
+        "withdrawalId": 123456,
+        "wallet": "MAIN",
+        "createdAt": 1592397360000,
+        "updatedAt": 1592940633000,
+        "method": "ETH",
+        "address": "0x25b78frd4...8n",
+        "priority": "HIGH",
+        "fee": 0.05,
+        "status": "ACCEPTED",
+        "message": "from DIGITEX with love"
+    }
+}
+```
+
+------
+
+#### Positions channel
+
+**Channel name:** `private@positions`.
+
+Published message:
+
+```json
+{
+    "ch": "positions",
+    "data": [
+        {
+            "id": 1254789,
+            "symbol": "BTCUSD-PERP",
+            "type": "LONG",
+            "openTime": 124578957000,
+            "entryPx": 9550,
+            "qty": 50,
+            "margin": 9550,
+            "liquidationPx": 14180,
+            "leverage": 1,
+            "pnl": 50,
+            "upnl": 10,
+            "liquidationVolume": 0,
+            "bankruptcyVolume": 0,
+            "lastTradePx": 9800,
+            "lastTradeQty": 50,
+            "markPx": 9950,
+        }    
+    ]
+}
+```
+
+------
+
+#### Transfers channel
+
+**Channel name:** `private@transfers`.
+
+Published message:
+
+```json
+{
+    "ch": "transfers",
+    "data": {
+        "id": 125468,
+        "createdAt": 1592484229000,
+        "updatedAt": 1592941512000,
+        "fromWallet": "MAIN",
+        "toWallet": "TRADING",
+        "amount": 1000,
+        "currency": "DGTX",
+        "status": "ACCEPTED"
+    }
+}
+```
+
+------
+
+#### Fills channel
+
+**Channel name:** `private@fills`.
+
+Published message:
+
+```json
+{
+    "ch": "fills",
+    "data": {
+        "symbol": "BTCUSD-PERP",
+        "ts": 1592941576000,
+        "fillId": "12345",
+        "clOrdId": "qwerty",
+        "side": "BUY",
+        "ordPx": 9500,
+        "fillPx": 9500,
+        "fillQty": 100
     }
 }
 ```
