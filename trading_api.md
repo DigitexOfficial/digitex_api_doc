@@ -35,15 +35,16 @@ Possible value of order's `status`: `UNDEFINED`, `PENDING`, `ACCEPTED`, `REJECTE
 
 `POST /api/v1/private/order/place`
 
-| Parameter name | Parameter type | Description                       |
-| -------------- | -------------- | --------------------------------- |
-| symbol         | string         | e.g. 'BTCUSD-PERP'                |
-| clOrdId        | string         | assigned by the trader            |
-| ordType        | string         | `MARKET`/`LIMIT`                  |
-| timeInForce    | string         | `GTD`, `GTC`, `GTF`, `IOC`, `FOK` |
-| side           | string         | `BUY`/`SELL`                      |
-| px             | float          | not required if type is `MARKET`  |
-| qty            | float          | desired amount of contracts       |
+| Parameter name | Parameter type | Description                                                  |
+| -------------- | -------------- | ------------------------------------------------------------ |
+| symbol         | string         | e.g. 'BTCUSD-PERP'                                           |
+| clOrdId        | string         | assigned by the trader                                       |
+| ordType        | string         | `MARKET`/`LIMIT`/`STOP`/`TAKE_PROFIT`                        |
+| timeInForce    | string         | `GTD`, `GTC`, `GTF`, `IOC`, `FOK`                            |
+| side           | string         | `BUY`/`SELL`                                                 |
+| px             | float          | not required if type is `MARKET`                             |
+| stopPx         | float          | The stop price associated with a stop or take profit order. Required if `ordType` is `STOP` or `TAKE_PROFIT`. For `STOP` order `px` denotes the worst price at which the `STOP` or `TAKE_PROFIT` order can get filled at. If no `px` is provided the `STOP` or `TAKE_PROFIT` order will trigger a `MARKET` order. |
+| qty            | int64          | desired amount of contracts                                  |
 
 For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` positive and <u>integral</u>.
 
@@ -113,7 +114,7 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 **Request**
 
-`GET /api/v1/private/orders/active`
+`GET /api/v1/private/order/active`
 
 | Parameter name | Parameter type | Description                    |
 | -------------- | -------------- | ------------------------------ |
@@ -167,16 +168,17 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 
 `POST /api/v1/private/order/update`
 
-| Parameter name | Parameter type | Description                                  |
-| -------------- | -------------- | -------------------------------------------- |
-| symbol         | string         | e.g. 'BTCUSD-PERP'                           |
-| oldClOrdId     | string         | `clOrdId` of the original order              |
-| clOrdId        | string         | assigned by the trader (new order's ID)      |
-| ordType        | string         | `MARKET`/`LIMIT`                             |
-| timeInForce    | string         | `GTD`, `GTC`, `GTF`,` IOC`, `FOK`            |
-| side           | string         | `BUY`/`SELL`                                 |
-| px             | float          | not required if type is `MARKET`; *optional* |
-| qty            | float          | desired amount of contracts                  |
+| Parameter name | Parameter type | Description                                                  |
+| -------------- | -------------- | ------------------------------------------------------------ |
+| symbol         | string         | e.g. 'BTCUSD-PERP'                                           |
+| oldClOrdId     | string         | `clOrdId` of the original order                              |
+| clOrdId        | string         | assigned by the trader (new order's ID)                      |
+| ordType        | string         | `MARKET`/`LIMIT`                                             |
+| timeInForce    | string         | `GTD`, `GTC`, `GTF`,` IOC`, `FOK`                            |
+| side           | string         | `BUY`/`SELL`                                                 |
+| px             | float          | not required if type is `MARKET`                             |
+| stopPx         | float          | The stop price associated with a stop or take profit order. Required if `ordType` is `STOP` or `TAKE_PROFIT`. For `STOP` order `px` denotes the worst price at which the `STOP` or `TAKE_PROFIT` order can get filled at. If no `px` is provided the `STOP` or `TAKE_PROFIT` order will trigger a `MARKET` order. |
+| qty            | int64          | desired amount of contracts                                  |
 
 For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` positive and <u>integral</u>.
 
