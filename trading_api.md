@@ -559,6 +559,8 @@ Possible withdrawal `status`:  `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`, `DE
 }
 ```
 
+Messages about changes to order's status will be sent during order processing. 
+
 ------
 
 #### Get order status
