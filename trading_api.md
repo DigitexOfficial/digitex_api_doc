@@ -71,6 +71,8 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 }
 ```
 
+`createdAt` and `updatedAt` are timestamps in milliseconds.
+
 ------
 
 #### Get order status
@@ -106,7 +108,7 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
 }
 ```
 
-
+`createdAt` and `updatedAt` are timestamps in milliseconds.
 
 ------
 
@@ -159,6 +161,8 @@ For `BTCUSD-PERP`: `px` should be positive and <u>multiple of 5</u>, `qty` posit
     ]
 }
 ```
+
+`createdAt` and `updatedAt` are timestamps in milliseconds.
 
 ------
 
@@ -258,6 +262,8 @@ General response with `ok` or `error`.
     ]
 }
 ```
+
+`openTime` is timestamp in milliseconds.
 
 ------
 
@@ -364,6 +370,8 @@ There are several kinds of wallets: `MAIN`, `TRADING`.
 
 Possible values of transfer `status`: `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`.
 
+`createdAt` and `updatedAt` are timestamps in milliseconds.
+
 ------
 
 #### Withdrawals
@@ -379,7 +387,7 @@ Possible values of transfer `status`: `CREATED`, `PENDING`, `ACCEPTED`, `REJECTE
 | amount         | float          | desired amount                        |
 | address        | string         | e.g. 0x25b78frd4...8n                 |
 | priority       | string         | `low`, `mid`, `high`. Default: `mid`. |
-| message        | string         | arbitrary text                        |
+| message        | string         | arbitrary text; *optional*            |
 
 **Response**
 
@@ -403,6 +411,8 @@ Possible values of transfer `status`: `CREATED`, `PENDING`, `ACCEPTED`, `REJECTE
 
 Possible withdrawal `status`:  `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`, `DECLINED`, `CANCELED`.
 
+`createdAt` and `updatedAt` are timestamps in milliseconds.
+
 ------
 
 #### Trade history
@@ -411,12 +421,12 @@ Possible withdrawal `status`:  `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`, `DE
 
 `GET /api/v1/private/trades/history`
 
-| Parameter name | Parameter type | Description           |
-| -------------- | -------------- | --------------------- |
-| symbol         | string         | e.g. 'BTCUSD-PERP'    |
-| from           | int64          | Timestamp             |
-| to             | int64          | Timestamp             |
-| limit          | int64          | Default: 10. Max: 100 |
+| Parameter name | Parameter type | Description               |
+| -------------- | -------------- | ------------------------- |
+| symbol         | string         | e.g. 'BTCUSD-PERP'        |
+| from           | int64          | Timestamp in milliseconds |
+| to             | int64          | Timestamp in milliseconds |
+| limit          | int64          | Default: 10. Max: 100     |
 
 **Response**
 
@@ -435,6 +445,8 @@ Possible withdrawal `status`:  `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`, `DE
 }
 ```
 
+`ts` is a timestamp in milliseconds.
+
 ------
 
 #### Fill history
@@ -443,12 +455,12 @@ Possible withdrawal `status`:  `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`, `DE
 
 `GET /api/v1/private/fills/history`
 
-| Parameter name | Parameter type | Description           |
-| -------------- | -------------- | --------------------- |
-| symbol         | string         | e.g. 'BTCUSD-PERP'    |
-| from           | int64          | Timestamp             |
-| to             | int64          | Timestamp             |
-| limit          | int64          | Default: 10. Max: 100 |
+| Parameter name | Parameter type | Description               |
+| -------------- | -------------- | ------------------------- |
+| symbol         | string         | e.g. 'BTCUSD-PERP'        |
+| from           | int64          | Timestamp in milliseconds |
+| to             | int64          | Timestamp in milliseconds |
+| limit          | int64          | Default: 10. Max: 100     |
 
 **Response**
 
@@ -458,7 +470,7 @@ Possible withdrawal `status`:  `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`, `DE
     "data": [
         {
             "symbol": "BTCUSD-PERP",
-            "createdAt": 123456789000,
+            "ts": 123456789000,
             "clOrdId": "qwerty",
             "side": "BUY/SELL",
             "ordPx": 9500,
@@ -469,6 +481,8 @@ Possible withdrawal `status`:  `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`, `DE
     ]
 }
 ```
+
+`ts`  is a timestamp in milliseconds.
 
 ------
 
