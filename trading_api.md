@@ -206,13 +206,13 @@ General response with `ok` or `error`.
 
 ------
 
-#### Cancel orders
+#### Cancel multiple orders
 
 Trader can cancel all the orders (`side` and `px` are omitted) or just orders with the specified `side`  and/or `px`.
 
 **Request**
 
-`POST /api/v1/private/orders/cancel`
+`POST /api/v1/private/order/cancel_all`
 
 | Parameter name | Parameter type | Description              |
 | -------------- | -------------- | ------------------------ |
@@ -229,7 +229,7 @@ General response with `ok` or `error`.
 
 **Request**
 
-`GET /api/v1/private/positions`
+`GET /api/v1/private/position`
 
 **Response**
 
@@ -267,7 +267,7 @@ You can close a single position or all positions (if `positionId` is omitted).
 
 **Request**
 
-`POST /api/v1/private/positions/close`
+`POST /api/v1/private/position/close`
 
 | Parameter name | Parameter type | Description                         |
 | -------------- | -------------- | ----------------------------------- |
@@ -275,6 +275,23 @@ You can close a single position or all positions (if `positionId` is omitted).
 | ordType        | string         | `MARKET`/`LIMIT`                    |
 | px             | float          | `px` is the price for `LIMIT` order |
 | qty            | float          | `0` or omit to fully close          |
+
+**Response**
+
+General response with `ok` or `error`.
+
+------
+
+#### Close all positions
+
+**Request**
+
+`POST /api/v1/private/position/close_all`
+
+| Parameter name | Parameter type | Description                             |
+| -------------- | -------------- | --------------------------------------- |
+| ordType        | string         | `MARKET`/`LIMIT`                        |
+| px             | float          | required if `ordType` is set to `LIMIT` |
 
 **Response**
 
