@@ -1,4 +1,4 @@
-# Trading API Draft
+# TRADING API DRAFT
 
 *<u>Note:</u> for each private request authentication is required.*
 
@@ -528,7 +528,7 @@ Possible withdrawal `status`:  `CREATED`, `PENDING`, `ACCEPTED`, `REJECTED`, `DE
 
 ## WEBSOCKET API
 
-### Requests
+### REQUESTS
 
 ------
 
