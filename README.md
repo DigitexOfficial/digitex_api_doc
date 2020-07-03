@@ -471,6 +471,39 @@ And in case of error response would be like:
 
 ------
 
+#### Public - Liquidations
+
+**HTTP Request**
+
+`GET /api/v1/public/liquidations`
+
+| Parameter | Type   | Description               |
+| --------- | ------ | ------------------------- |
+| symbol    | String | e.g. 'BTCUSD-PERP'        |
+| count     | int64  | Default: 100. Max: 10000. |
+
+**Response**
+
+```json
+{
+    "status":"ok",
+    "ts":1593780179450,
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "positions":[
+            {
+                "ts":1593780350000,
+                "qty":100,
+                "px":9100,
+                "type":LONG
+            }
+        ]
+    }
+}
+```
+
+------
+
 #### Error codes
 
 | Code | Description                            |
