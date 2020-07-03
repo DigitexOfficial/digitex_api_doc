@@ -703,6 +703,7 @@ You can cancel the order by using a Client Order ID (`clOrdId`) of a placed orde
     "id": 6,
     "method": "cancelOrder",
     "params": {
+        "symbol": "BTCUSD-PERP",
         "clOrdId": "p2w5r3t8"
     }
 }
@@ -728,6 +729,7 @@ Trader can cancel all the orders (`side` and `px` are omitted) or just orders wi
     "id": 7,
     "method": "cancelAllOrders",
     "params": {
+        "symbol": "BTCUSD-PERP",
         "side": "SELL"
     }
 }
@@ -797,6 +799,7 @@ Trader can specify `ordType` (`MARKET` or `LIMIT`), `px` (only for `LIMIT`) and 
     "id": 9,
     "method": "closePosition",
     "params": {
+        "symbol": "BTCUSD-PERP",
         "positionId": 451236,
         "ordType": "LIMIT",
         "px": 9300
@@ -824,6 +827,7 @@ Trader can specify `ordType` (`MARKET` or `LIMIT`) and `px` (if `ordType` is set
     "id": 10,
     "method": "closeAllPositions",
     "params": {
+        "symbol": "BTCUSD-PERP",
         "ordType": "LIMIT",
         "px": 9500
     }
