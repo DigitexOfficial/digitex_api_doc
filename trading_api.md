@@ -563,46 +563,6 @@ Messages about changes to order's status will be sent during order processing.
 
 ------
 
-#### Get order status
-
-```json
-{
-    "id": 3,
-    "method": "orderStatus",
-    "params": {
-        "clOrdId": "q1w2e3r2"
-    }
-}
-```
-
-**Response message**
-
-```json
-{
-    "id": 3,
-    "status": "ok",
-    "result": {
-        "symbol": "BTCUSD-PERP",
-        "clOrdId": "q1w2e3r2",
-        "status": "FILLED",
-        "createdAt": 1592381206000,
-        "updatedAt": 1592381785000,
-        "ordType": "LIMIT",
-        "timeInForce": "GTC",
-        "side": "BUY",
-        "px": 9200,
-        "avgPx": 9200,
-        "qty": 100,
-        "filledQty": 100,
-        "unfilledQty": 0
-    }
-}
-```
-
-`createdAt` and `updatedAt` are timestamps in milliseconds.
-
-------
-
 #### Get active orders
 
 Field `symbol` is optional.
