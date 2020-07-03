@@ -622,38 +622,6 @@ Field `symbol` is optional.
 
 ------
 
-#### Update order
-
-```json
-{
-    "id": 5,
-    "method": "updateOrder",
-    "params": {
-        "symbol": "BTCUSD-PERP",
-        "oldClOrdId": "q1w2e3r2",
-        "clOrdId": "vbn12358",
-        "ordType": "LIMIT",
-        "timeInForce": "GTC",
-        "side": "SELL",
-        "px": 9300,
-        "qty": 20
-    }
-}
-```
-
-`oldClOrdId` is the identifier of the order you want to update.
-
-**Response message**
-
-```json
-{
-    "id": 5,
-    "status": "ok"
-}
-```
-
-------
-
 #### Cancel order
 
 You can cancel the order by using a Client Order ID (`clOrdId`) of a placed order.
