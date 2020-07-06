@@ -179,7 +179,7 @@ Message
     "data":{
         "symbol":"BTCUSD-PERP",
         "orders":[
-            {"px":9540,"qty":100,"ts":123456789000}
+            {"ts":1594039337113,"qty":75,"px":9255,"type":"SHORT"}
         ]
     }
 }
