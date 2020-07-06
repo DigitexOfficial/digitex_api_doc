@@ -178,7 +178,7 @@ Message
     "ch":"liquidations",
     "data":{
         "symbol":"BTCUSD-PERP",
-        "orders":[
+        "positions":[
             {"ts":1594039337113,"qty":75,"px":9255,"type":"SHORT"}
         ]
     }
