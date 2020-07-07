@@ -412,6 +412,8 @@ The following message will be received as a result of order/orders cancellation:
 
 <u>Note</u>: `CENCELLED` order ID (`clOrdId`) - differs from ID of placed order (`oldClOrdId`).
 
+Another valid value for `status` is `TERMINATED` which is used when orders are cancelled by the exchange.
+
 Field `orders` contains all the orders that have been cancelled. 
 
 ------
