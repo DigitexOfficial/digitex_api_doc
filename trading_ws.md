@@ -744,47 +744,52 @@ Trader will receive the following message if he/she has open position during fun
     "ch":"funding",
     "data":{
         "symbol":"BTCUSD-PERP",
-        "traderBalance":100693.356,
-        "orderMargin":0,
-        "positionMargin":1863,
-        "upnl":-10,
-        "pnl":20.721,
-        "positionContracts":50,
-        "positionVolume":931500,
-        "positionLiquidationVolume":885000,
-        "positionBankruptcyVolume":838350,
-        "positionType":"LONG",
-        "payout": 1.86,
-        "payoutPerContract": 0.0186,
-        "markPx": 9300,
-        "positionMarginChange": 0,
         "contracts":[
             {
-                "timestamp":1594053698798,
+                "timestamp":1594137600000,
                 "traderId":94889,
-                "contractId":612847804,
-                "oldContractId":612837668,
-                "origContractId":612837668,
-                "openTime":1594053061352,
                 "positionType":"LONG",
-                "entryPx":9310,
-                "paidPx":931,
-                "liquidationPx":8845,
-                "bankruptcyPx":8379,
-                "qty":50,
-                "exitPx":0,
+                "entryPx":9275,
+                "paidPx":927.5,
+                "liquidationPx":8815,
+                "bankruptcyPx":8348.43,
+                "qty":25,"exitPx":0,
                 "leverage":10,
-                "entryQty":50,
+                "contractId":614339945,
+                "oldContractId":614224561,
+                "openTime":1594122555760,
+                "entryQty":25,
                 "exitQty":0,
                 "exitVolume":0,
-                "fundingPaidPx":0,
-                "fundingQty":0,
-                "fundingVolume":0,
-                "fundingCount":0
+                "fundingPaidPx":0.93,
+                "fundingQty":25,
+                "fundingVolume":23.25,
+                "fundingCount":1,
+                "isFunding":1,
+                "origContractId":614053631
+            },
+            {
+                ...omitted...
+            },
+            {
+                ...omitted...
             }
-        ]
+        ],
+        "traderBalance":100549.736,
+        "orderMargin":0,
+        "positionMargin":1850.59,
+        "upnl":0,
+        "pnl":0,
+        "positionContracts":0,
+        "positionVolume":0,
+        "positionLiquidationVolume":0,
+        "positionBankruptcyVolume":0,
+        "payout":-1.86,
+        "payoutPerContract":0.0186,
+        "markPx":238.8477,
+        "positionMarginChange":-1.86
     }
-}
+} 
 ```
 
 `payoutPerContract` is the value of the payout per contract during the funding.
