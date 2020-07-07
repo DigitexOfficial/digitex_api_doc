@@ -587,18 +587,11 @@ The exchange will send the following message in response:
         "positionMargin":466,
         "upnl":0,
         "pnl":20.721,
-        "accumQty":65,
-        "markPx":9317.4806,
         "positionContracts":50,
         "positionVolume":466000,
         "positionLiquidationVolume":454500,
         "positionBankruptcyVolume":442700,
         "positionType":"LONG",
-        "lastTradePx":9320,
-        "lastTradeQty":1287,
-        "lastTradeTimestamp":1594052957290,
-        "buyOrderMargin":465.5,
-        "sellOrderMargin":0,
         "contracts":[
             {
                 "timestamp":1594052943135,
@@ -636,15 +629,11 @@ The exchange will send the following message in response:
                 "paidPx":465.5,
                 "qty":50,
                 "origQty":50,
-                "leverage":20,
-                "volume":0,
-                "isClosing":0,
-                "mayIncrease":0
+                "leverage":20
             }
         ],
         "leverage":20,
-        "buyOrderQty":50,
-        "sellOrderQty":0
+        "markPx":9317.4806
     }
 }
 ```
