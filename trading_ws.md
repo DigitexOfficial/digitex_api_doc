@@ -158,9 +158,7 @@ If the order has been accepted by the trading engine trader will receive the fol
         "positionMargin":231.125,
         "upnl":0,
         "pnl":468.16,
-        "accumQty":125,
         "markPx":9239.7181,
-        "volume":0
     }
 }
 ```
