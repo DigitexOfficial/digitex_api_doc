@@ -244,7 +244,7 @@ When order is filled trader will receive the following message:
                 "origContractId":612705754,
                 "openTime":1594045833043,
                 "positionType":"LONG",
-                "px":9245,
+                "entryPx":9245,
                 "paidPx":462.25,
                 "liquidationPx":9015,
                 "bankruptcyPx":8782.75,
@@ -422,9 +422,9 @@ Field `orders` contains all the orders that have been cancelled.
 
 ##### One Contract
 
-Trader can close specific contract using its ID (`contractId`). 
+Trader can close a specific contract using its ID (`contractId`). 
 
-There is an option to specify order type (`MARKET` or `LIMIT`), price (only for `LIMIT`) and quantity (to close only a part of the contract) for contract close operation.
+There is an option to specify order type (`MARKET` or `LIMIT`), price (only for `LIMIT`) and quantity (to close only a part of the contract) for a contract close operation.
 
 A particular contract can be closed via the following message:
 
@@ -442,7 +442,7 @@ A particular contract can be closed via the following message:
 }
 ```
 
-And the response message will be he following:
+And the response message will be the following:
 
 ```json
 {
@@ -450,15 +450,94 @@ And the response message will be he following:
     "data":{
         "symbol":"BTCUSD-PERP",
         "orderIds":[
-            "\ufffd\u000ef\u0010\ufffd\ufffdJN\ufffd\u0026\ufffd\ufffd\u001e\ufffd'!"
+            "\u0013HoYi5A͐:\ufffd!\ufffdf\ufffd\ufffd"
+        ]
+    }
+} 
+```
+
+`orderIds` contains an array of `clOrdId`s which have been created by the exchange to close the contract. Trader also will receive `orderStatus` and `orderFilled` messages related to these orders. The latter one will contain the information about affected contracts.
+
+```json
+{
+    "ch":"orderStatus",
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "timestamp":1594113819695,
+        "clOrdId":"\u0013HoYi5A͐:\ufffd!\ufffdf\ufffd\ufffd",
+        "origClOrdId":"\u0013HoYi5A͐:\ufffd!\ufffdf\ufffd\ufffd",
+        "openTime":1594113819695,
+        "orderStatus":"ACCEPTED",
+        "orderType":"MARKET",
+        "orderSide":"SELL",
+        "timeInForce":"GTC",
+        "px":0,
+        "paidPx":0,
+        "qty":50,
+        "origQty":50,
+        "leverage":10,
+        "traderBalance":100552.596,
+        "orderMargin":0,
+        "positionMargin":0,
+        "upnl":0,
+        "pnl":7.11,
+        "markPx":9242.3196,
+        "oldContractId":613903122 
+    }
+} 
+```
+
+```json
+{
+    "ch":"orderFilled",
+    "data":{
+        "symbol":"BTCUSD-PERP",
+        "timestamp":1594113819695,
+        "clOrdId":"\u0013HoYi5A͐:\ufffd!\ufffdf\ufffd\ufffd",
+        "newClOrdId":"\ufffdc4\ufffd\u0007WA\ufffd\ufffd\ufffd`Do?\ufffd\u0001",
+        "origClOrdId":"\u0013HoYi5A͐:\ufffd!\ufffdf\ufffd\ufffd",
+        "openTime":1594113819695,
+        "orderStatus":"FILLED",
+        "px":0,
+        "paidPx":0,
+        "qty":0,
+        "origQty":50,
+        "droppedQty":0,
+        "traderBalance":100552.596,
+        "orderMargin":0,
+        "positionMargin":0,
+        "upnl":0,
+        "pnl":7.11,
+        "positionContracts":0,
+        "positionVolume":0,
+        "positionLiquidationVolume":0,
+        "positionBankruptcyVolume":0,
+        "markPx":9242.3196,
+        "contracts":[
+            {
+                "contractId":613903300,
+                "origContractId":613903122,
+                "entryPx":9240,
+                "paidPx":0,
+                "liquidationPx":0,
+                "bankruptcyPx":0,
+                "qty":0,
+                "exitPx":9240,
+                "oldContractId":613903122,
+                "entryQty":0,
+                "exitQty":50,
+                "exitVolume":462000,
+                "fundingPaidPx":0,
+                "fundingQty":0,
+                "fundingVolume":0,
+                "fundingCount":0
+            }
         ]
     }
 }
 ```
 
-The field `orderIds` contains an array of `clOrdId`s which have been created by the exchange to close the contract. Trader also will receive `orderStatus` and `orderFilled` messages related to these orders. The latter one will contain the information about affected contracts.
-
-Note: if trader closes only a part of the contract the exchange will generate new ID for remained part of the contract (this ID can be found in `orderFilled` message).
+<u>Note</u>: if the trader closes only a part of the contract the exchange will generate **new** ID for the remained part of the contract (this ID can be found in `orderFilled` message).
 
 ##### All Contracts
 
@@ -484,7 +563,7 @@ A sequence of messages that will be received as a result is the same as in the c
 
 #### Request Trader Status
 
-Trader can request its status via the following message:
+Trader can request his/her status via the following message:
 
 ```json
 {
@@ -496,7 +575,7 @@ Trader can request its status via the following message:
 }
 ```
 
-The exchange will send in response the following:
+The exchange will send the following message in response:
 
 ```json
 {
