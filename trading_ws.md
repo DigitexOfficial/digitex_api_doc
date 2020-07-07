@@ -56,6 +56,8 @@ For `BTCUSD-PERP`: order price should be positive and a <u>multiple of 5</u>, or
 
 All timestamps are provided in milliseconds.
 
+<u>Note</u>: the trader cannot have a mix of long and short contracts in his/her position.
+
 #### Order Chain
 
 Each active order in the engine has a unique order identifier (`clOrdId`). 
@@ -64,11 +66,30 @@ Value of the `clOrdId` is assigned by the trader. It should be a unique string f
 
 This original order identifier is preserved in `origClOrdId` field of the order-related messages.
 
-Orders are immutable objects in the engine, that means that any modification to the order (full or partial fill, quantity change or leverage change, cancellation) creates a new order with `clOrdId` generated bu the engine. The new identifier is reported to the trader in `newClOrdId` field, and the previous (old) order identifier is reported in `oldClOrdId` field.
+Orders are immutable objects in the engine, that means that any modification to the order (full or partial fill, quantity change or leverage change, cancellation) creates a **new** order with `clOrdId` generated bu the engine. The new identifier is reported to the trader in `newClOrdId` field, and the previous (old) order identifier is reported in `oldClOrdId` field.
 
 Full fill or cancellation also create a new empty order with a quantity 0.
 
 Therefore the full life cycle of an order is represented by a chain of orders. All orders in the chain have the same `origClOrdId` equal to the ``clOrdId` of the `placeOrder` message. The last order in the chain has `qty` field equal to 0, and all orders in the chain except the first have `oldClOrdId` field referring to the previous order in the chain.
+
+#### Contract Chain
+
+Contracts (or position) represent future contracts in possession of a trader. 
+
+Each contract has a unique identifier (`contractId`) and the trader can close a particular contract using this identifier.
+
+Contracts are immutable and any change to the existing contract, including its closing, liquidation or settlement results in creation of a **new** contract. 
+
+Life cycle of a contract is represented by a contract chain. The last contract in the chain has `qty` equal to 0.
+All contracts in the chain except the first one have `oldContractId` field referring to the previous contract in the chain.
+All contracts in the chain have `origContractId` field equal to `contractId` of the first contract in the chain.
+Field `oldClOrdId` is the identifier of the order that was matched and resulted in the first contract in the contract chain.
+
+If neither fields `isIncrease`, `isFunding`, `isLiquidation` are set, the contract
+is created from another contract by increasing/decreasing (possibly to 0) the quantity of that contract.
+
+A terminal contract is a contract with `qty` equal to 0. The terminal contract is always the last contract in a contract chain.
+A terminal contract is created when a contract is fully closed by matching an order on the opposite side, or in case of liquidation.
 
 ------
 
@@ -204,25 +225,16 @@ When order is filled trader will receive the following message:
         "qty":0,
         "droppedQty":0,
         "origQty":25,
-        "volume":0,
         "traderBalance":100665.635,
         "orderMargin":0,
         "positionMargin":231.125,
         "upnl":0,
         "pnl":468.16,
-        "accumQty":125,
         "positionContracts":25,
         "positionVolume":231125,
         "positionLiquidationVolume":225375,
         "positionBankruptcyVolume":219568.75,
         "positionType":"LONG",
-        "lastTradePx":9245,
-        "lastTradeQty":25,
-        "lastTradeTimestamp":1594045833043,
-        "buyOrderMargin":0,
-        "sellOrderMargin":0,
-        "buyOrderQty":0,
-        "sellOrderQty":0,
         "markPx":9239.7181,
         "contracts":[
             {
@@ -252,7 +264,7 @@ When order is filled trader will receive the following message:
         ],
         "marketTrades":[
             {
-                "orderPosition":"LONG",
+                "side":"BUY",
                 "px":9245,
                 "paidPx":462.25,
                 "qty":25,
@@ -264,9 +276,51 @@ When order is filled trader will receive the following message:
 }
 ```
 
-The field `contracts` contains a list of contacts that were added to trader's position. 
+`status` contains the order fill status. It is either `FILLED` if the order has been filled entirely, or `PARTIAL` if the order has been partially filled.
 
-Trader can use the value of `contractId` to close specific contract in the future by this ID.
+If the order has been partially filled, either the remainder of the order stays in the orderbook as a **new** order, or the remainder of the order is cancelled.
+
+If the remainder of the order is cancelled, field `droppedQty` contains the quantity of the cancelled part of the order. 
+
+In case of `PARTIAL` fill either `qty` > 0  or `droppedQty` > 0 but not both.
+
+If the order has been entirely filled `qty` == 0 and `droppedQty` == 0.
+
+`positionType` is `LONG` if the trader has long position, `SHORT` if the trader has short position.
+
+`positionContracts` is the total amount of contracts held by the trader. This value is always non-negative. `positionVolume` is the total monetary value of the position. It is computed as sum of `px` * `qty` over all active contracts.
+
+`positionLiquidationVolume` is the total monetary value of all liquidations of the position, i.e. sum of `liquidationPx` * `qty` over all active contracts.
+`positionBankruptcyVolume` is the same for the bankruptcy price.
+
+`contracts` contains a list of contacts that were changed as the result of this fill. 
+
+`entryPx` is the entry price of the contract.
+
+`paidPx` is the price which is held as position margin per unit.
+
+`exitPx` holds the price at which the quantity was decreased.
+
+`entryQty` contains total quantity of all increases to the contract chain.
+
+`exitQty` contains total quantity of all decreases to the contract chain.
+
+As opposed to the increases, the decreases may be at different exit prices, so field `exitVolume` contains the volume of all exits to the contract chain.
+
+`fundingCount` contains number of fundings performed during the lifetime of this contract chain.
+`fundingPaidPx` is the accumulated value of fundings per one unit in terms of the market price.
+`fundingQty` is the total number of units accumulated during all fundings.
+`fundingVolume` is the total volume (`px` * `qty`) of all funding during the contract lifetime.
+
+<u>Note</u>: the funding information is reset to 0 if the quantity of the contract is increased and the trader has enough funds on his/her trading balance to replenish the position margin for this contract to the original value.
+
+Trader can use the value of `contractId` to close specific contract in the future using this ID.
+
+`openTime` is the timestamp of the first contract in the contract chain.
+
+`marketTrades` contains the list of trades of this trader performed as the result of the fill.
+
+`isMaker` is set to 1, if this trade resulted from filling up the order already in the orderbook.
 
 Note: the value of `newClOrdId` is generated by the exchange. It's the ID of `FILLED` order and this order has the reference to the originally placed order via `origClOrdId`.
 
