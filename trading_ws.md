@@ -599,7 +599,7 @@ The exchange will send the following message in response:
                 "contractId":612835558,
                 "openTime":1594052943135,
                 "positionType":"LONG",
-                "px":9320,
+                "entryPx":9320,
                 "paidPx":466,
                 "liquidationPx":9090,
                 "bankruptcyPx":8854,
@@ -667,6 +667,16 @@ The exchange will respond with the following:
     "data":{
         "symbol":"BTCUSD-PERP",
         "leverage":10,
+        "traderBalance":100693.356,
+        "orderMargin":0,
+        "positionMargin":1863,
+        "upnl":-10,
+        "pnl":20.721,
+        "positionContracts":100,
+        "positionVolume":931500,
+        "positionLiquidationVolume":885000,
+        "positionBankruptcyVolume":838350,
+        "positionType":"LONG",
         "contracts":[
             {
                 "timestamp":1594053698798,
@@ -675,7 +685,7 @@ The exchange will respond with the following:
                 "oldContractId":612837668,
                 "openTime":1594053061352,
                 "positionType":"LONG",
-                "px":9310,
+                "entryPx":9310,
                 "paidPx":931,
                 "liquidationPx":8845,
                 "bankruptcyPx":8379,
@@ -695,17 +705,17 @@ The exchange will respond with the following:
                 "timestamp":1594053698798,
                 "traderId":94889,
                 "contractId":612847805,
+                "oldContractId":612835558,
                 "origContractId":612835558,
                 "openTime":1594052943135,
                 "positionType":"LONG",
-                "px":9320,
+                "entryPx":9320,
                 "paidPx":932,
                 "liquidationPx":8855,
                 "bankruptcyPx":8388,
                 "qty":50,
                 "exitPx":0,
                 "leverage":10,
-                "oldContractId":612835558,
                 "entryQty":50,
                 "exitQty":0,
                 "exitVolume":0,
@@ -715,30 +725,12 @@ The exchange will respond with the following:
                 "fundingCount":0
             }
         ],
-        "activeOrders":[],
-        "traderBalance":100693.356,
-        "orderMargin":0,
-        "positionMargin":1863,
-        "upnl":-10,
-        "pnl":20.721,
-        "accumQty":115,
-        "positionContracts":100,
-        "positionVolume":931500,
-        "positionLiquidationVolume":885000,
-        "positionBankruptcyVolume":838350,
-        "positionType":"LONG",
-        "buyOrderMargin":0,
-        "sellOrderMargin":0,
-        "lastTradePx":9310,
-        "lastTradeQty":866,
-        "lastTradeTimestamp":1594053698097,
-        "buyOrderQty":0,
-        "sellOrderQty":0
+        "activeOrders":[]
     }
 }
 ```
 
-This message contains trader's balance, current position, active orders (can be cancelled using corresponding `clOrdId`) and contracts (can be closed using corresponding `contractId`) according to new leverage value.
+This message contains trader's balance, current position, active orders (can be cancelled using corresponding `clOrdId`) and contracts (can be closed using corresponding `contractId`) according to a new leverage value.
 
 ------
 
