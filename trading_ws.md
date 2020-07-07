@@ -743,15 +743,30 @@ Trader will receive the following message if he/she has open position during fun
     "ch":"funding",
     "data":{
         "symbol":"BTCUSD-PERP",
+        "traderBalance":100693.356,
+        "orderMargin":0,
+        "positionMargin":1863,
+        "upnl":-10,
+        "pnl":20.721,
+        "positionContracts":50,
+        "positionVolume":931500,
+        "positionLiquidationVolume":885000,
+        "positionBankruptcyVolume":838350,
+        "positionType":"LONG",
+        "payout": 1.86,
+        "payoutPerContract": 0.0186,
+        "markPx": 9300,
+        "positionMarginChange": 0,
         "contracts":[
             {
                 "timestamp":1594053698798,
                 "traderId":94889,
                 "contractId":612847804,
                 "oldContractId":612837668,
+                "origContractId":612837668,
                 "openTime":1594053061352,
                 "positionType":"LONG",
-                "px":9310,
+                "entryPx":9310,
                 "paidPx":931,
                 "liquidationPx":8845,
                 "bankruptcyPx":8379,
@@ -764,35 +779,14 @@ Trader will receive the following message if he/she has open position during fun
                 "fundingPaidPx":0,
                 "fundingQty":0,
                 "fundingVolume":0,
-                "fundingCount":0,
-                "origContractId":612837668
+                "fundingCount":0
             }
-        ],
-        "traderBalance":100693.356,
-        "orderMargin":0,
-        "positionMargin":1863,
-        "upnl":-10,
-        "pnl":20.721,
-        "accumQty":100,
-        "positionContracts":50,
-        "positionVolume":931500,
-        "positionLiquidationVolume":885000,
-        "positionBankruptcyVolume":838350,
-        "positionType":"LONG",
-        "buyOrderMargin":0,
-        "sellOrderMargin":0,
-        "payout": 1.86,
-        "payoutPerContract": 0.0186,
-        "lastTradePx":9310,
-        "lastTradeQty":866,
-        "lastTradeTimestamp":1594053698097,
-        "markPx": 9300,
-        "positionMarginChange": 0,
-        "buyOrderQty":0,
-        "sellOrderQty":0
+        ]
     }
 }
 ```
+
+`payoutPerContract` is the value of the payout per contract during the funding.
 
 ------
 
@@ -817,21 +811,16 @@ If trader's position has been liquidated and/or active orders have been terminat
         "positionVolume": 0,
         "positionLiquidationVolume": 0,
         "positionBankruptcyVolume": 0,
-        "lastTradePx": 9300,
-        "lastTradeQty": 100,
-        "lastTradeTimestamp": 1594053698097,
-        "buyOrderMargin": 0,
-        "sellOrderMargin": 0,
         "traderBalanceIncrement": 1000,
-        "buyOrderQty": 0,
-        "sellOrderQty": 0,
         "markPx": 9285
     }
 }
         
 ```
 
-Field `liquidatedContracts` contains an array of liquidated contracts (the same structure as in `traderStatus` message).
+`liquidatedContracts` contains an array of liquidated contracts (the same structure as in `traderStatus` message).
+
+`terminatedOrders` contains an array of `clOrdId`s of terminated orders.
 
 ------
 
