@@ -2,6 +2,8 @@
 
 ### General
 
+#### Messages
+
 *<u>Note:</u> authentication request must be sent before any other trading request.*
 
 Each request has the following structure:
@@ -38,13 +40,13 @@ And in case of error response would be like:
 
 <u>Note</u>: the error will also be returned in case of system maintenance and absence of data for the response. 
 
-Value of the `clOrdId` is assigned by the trader. It should be a unique string for each order. This string can be any length, but only the first 16 bytes are used by the exchange. If the length is less than 16 bytes the trading engine will add zero bytes to make it 16 bytes total.
-
 Possible value of order's `status`:  `PENDING`, `ACCEPTED`, `REJECTED`, `CANCELED`, `FILLED`, `PARTIAL`, `TERMINATED`, `EXPIRED`, `TRIGGERED`.
 
 Possible values of `ordType`: `MARKET`, `LIMIT`.
 
 Possible values of `timeInForce`: `GTD`, `GTC`, `GTF`, `IOC`, `FOK`.
+
+<u>Note</u>: currently only `GTC` (good till cancel) value is supported.
 
 Possible values of `side`: `BUY`, `SELL`.
 
@@ -53,6 +55,20 @@ Possible values of `ch` (channel name): `error`, `orderStatus`, `orderFilled`, `
 For `BTCUSD-PERP`: order price should be positive and a <u>multiple of 5</u>, order quantity should be positive and <u>integral</u>.
 
 All timestamps are provided in milliseconds.
+
+#### Order Chain
+
+Each active order in the engine has a unique order identifier (`clOrdId`). 
+
+Value of the `clOrdId` is assigned by the trader. It should be a unique string for each order. This string can be any length, but only the first 16 bytes are used by the exchange. If the length is less than 16 bytes the trading engine will add zero bytes to make it 16 bytes total.
+
+This original order identifier is preserved in `origClOrdId` field of the order-related messages.
+
+Orders are immutable objects in the engine, that means that any modification to the order (full or partial fill, quantity change or leverage change, cancellation) creates a new order with `clOrdId` generated bu the engine. The new identifier is reported to the trader in `newClOrdId` field, and the previous (old) order identifier is reported in `oldClOrdId` field.
+
+Full fill or cancellation also create a new empty order with a quantity 0.
+
+Therefore the full life cycle of an order is represented by a chain of orders. All orders in the chain have the same `origClOrdId` equal to the ``clOrdId` of the `placeOrder` message. The last order in the chain has `qty` field equal to 0, and all orders in the chain except the first have `oldClOrdId` field referring to the previous order in the chain.
 
 ------
 
@@ -113,7 +129,7 @@ To place a new order the following message should be sent:
 } 
 ```
 
-Note: in case of `MARKET` order field `px` could be omitted.
+<u>Note</u>: in case of `MARKET` order field `px` could be omitted. Field `timeInForce` can be omitted for `MARKET` orders because currently only `GTC` is supported.
 
 The order can be either accepted or rejected by the exchange.
 
@@ -143,10 +159,6 @@ If the order has been accepted by the trading engine trader will receive the fol
         "upnl":0,
         "pnl":468.16,
         "accumQty":125,
-        "buyOrderMargin":0,
-        "sellOrderMargin":0,
-        "buyOrderQty":0,
-        "sellOrderQty":0,
         "markPx":9239.7181,
         "volume":0
     }
@@ -154,6 +166,23 @@ If the order has been accepted by the trading engine trader will receive the fol
 ```
 
 The value of `clOrdId` can be used to cancel this order in the future (in case of `LIMIT` order).
+
+`leverage` contains current trader's position.
+
+`openTime` is the timestamp when the original `placeOrder` has been handled by the trading engine.
+
+`origQty` is the quantity of the original order.
+
+`paidPx` is the amount of funds locked on the trader's account as the margin. If `leverage` is 1, `paidPx` equals to `px`. 
+
+`traderBalance` is the current trading balance of the trader.
+
+`orderMargin` is the amount of funds locked in all active orders. 
+
+`positionMargin` is the total amount of funds locked in the position (contracts, active orders). 
+
+`upnl` is the unrealized PnL at this moment.
+`pnl` is the realized PnL, i.e. the change to the trader balance achieved as the result of all trading operations since the last funding. Explicit trader's transfers to/from trading account are not accounted into PnL.
 
 ------
 
