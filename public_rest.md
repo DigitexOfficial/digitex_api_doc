@@ -484,7 +484,7 @@ And in case of error response would be like:
                 "ts":1593780350000,
                 "qty":100,
                 "px":9100,
-                "type":LONG
+                "type":"LONG"
             }
         ]
     }
