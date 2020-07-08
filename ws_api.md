@@ -230,12 +230,17 @@ Message
         "fundingRate":0.0003,
         "nextFundingTime":123456789000,
         "contractValue":194.9,
-        "dgtxUsdRate":0.03728994
+        "openInterest":431229,
+        "openInterestUsd":4586283.33,
+        "dgtxUsdRate":0.03728994,
+        "insuranceFund": 1711659412.9
     }
 }
 ```
 
 `volume24hUsd` is calculated as: `volume24h` * `contractValue` * `dgtxUsdRate`.
+
+`openInterestUsd` is calculated as: `openInterest` * `contractValue` * `dgtxUsdRate`.
 
 `contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_PRICE`, where `TICK_SIZE`=5 and `TICK_PRICE`=0.1 for BTCUSD-PERP contract.
 
