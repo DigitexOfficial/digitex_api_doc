@@ -2,6 +2,8 @@
 
 #### General information
 
+*WS API URL* [wss://ws-api.sandbox.digitex.fun](wss://ws-api.sandbox.digitex.fun)
+
 Server send message `ping` every 30 seconds. Client should respond with message `pong` or it would be disconnected. 
 
 The `id` used in JSON as an identifier of the request. The response for the particular request has the same `id` value.
