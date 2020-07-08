@@ -1,3 +1,3 @@
-# RESTful and Websocket API documentation
+# DIGITEX Futures API Draft
 
 See appropriate files.
