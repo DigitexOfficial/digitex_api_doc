@@ -2,7 +2,9 @@
 
 ## Market Data API
 
-*NOTE* This is *ALPHA-VERSION* of API. In future versions of API could be incompatible changes.
+**Note**: This is *ALPHA-VERSION* of API. In future versions of API could be incompatible changes.
+
+### Protocol
 
 Every response has the following structure in case of success. Field `data` could be either an object or an array.
 
@@ -24,6 +26,8 @@ And in case of error response would be like:
 ```
 
 **Note:** the error will also be returned in case of system maintenance and absence of data for the response. 
+
+------
 
 ### Endpoints
 
@@ -67,9 +71,9 @@ And in case of error response would be like:
             "markType":"fair_price",
             "initMargin":0,
             "maintMargin":0,
-            "deleverage":false,
+            "deleverage":true,
             "isLeverage": true,
-            "maxLeverage": 20,
+            "maxLeverage": 25,
             "createTime":0,
             "listingTime":0,
             "expiryTime":0,
@@ -315,17 +319,22 @@ And in case of error response would be like:
             "lastTradeQty":4936,
             "lastTradeTs":1590993332183,
             "contractValue":194.9,
-            "dgtxUsdRate":0.03728994
+            "openInterest":431229,
+            "openInterestUsd":4586283.33,
+            "dgtxUsdRate":0.03728994,
+            "insuranceFund":1711653380.28
         }
     ]
 }
 ```
 
-------
-
 `volume24hUsd` is calculated as: `volume24h` * `contractValue` * `dgtxUsdRate`.
 
+`openInterestUsd` is calculated as: `openInterest` * `contractValue` * `dgtxUsdRate`.
+
 `contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_PRICE`, where `TICK_SIZE`=5 and `TICK_PRICE`=0.1 for BTCUSD-PERP contract.
+
+------
 
 #### Public - Trades
 
