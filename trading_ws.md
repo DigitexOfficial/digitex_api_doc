@@ -440,7 +440,8 @@ Trader can schedule order placement if particular condition would be met. The va
         "timeInForce":"GTC",
         "side":"BUY",
         "px":9105,
-        "qty":100
+        "qty":100,
+        "mayIncrPosition": true
     }
 } 
 ```
@@ -454,6 +455,8 @@ Trader can schedule order placement if particular condition would be met. The va
 `condition` represents the condition that should be met. Possible values: `GREATER_EQUAL`, `LESS_EQUAL`.
 
 `pxValue` is the value to which `SPOT_PRICE` or `LAST_PRICE` will be compared using `condition`.
+
+`mayIncrPosition` should be set to `true` if the order is allowed to change the sign of the trader's position.
 
 When the condition is triggered a new order with the parameters `symbol`, `clOrdId`, `ordType`, `timeInForce`, `side`, `px`, `qty` will be placed. 
 
@@ -477,7 +480,8 @@ If a conditional order was created successfully the exchange will send the follo
                 "side":"BUY",
                 "timeInForce":"GTC",
                 "px":9105,
-                "qty":100
+                "qty":100,
+                "mayIncrPosition": true
             }
         ]
     }
@@ -505,7 +509,8 @@ When conditional order is triggered the exchange will inform the trader with the
                 "side":"SELL",
                 "timeInForce":"FOK",
                 "px":0,
-                "qty":25
+                "qty":25,
+                "mayIncrPosition": true
             }
         ]
     }
@@ -551,7 +556,8 @@ The exchange will send a list of all cancelled conditional orders:
                 "side":"BUY",
                 "timeInForce":"GTC",
                 "px":9105,
-                "qty":100
+                "qty":100,
+                "mayIncrPosition": true
             }
         ]
     }
@@ -790,7 +796,8 @@ The exchange will send the following message in response:
                 "side":"SELL",
                 "timeInForce":"FOK",
                 "px":0,
-                "qty":75
+                "qty":75,
+                "mayIncrPosition": true
             }
         ],
         "leverage":20,
