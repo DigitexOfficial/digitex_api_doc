@@ -586,7 +586,7 @@ A particular contract can be closed via the following message:
     "method":"closeContract",
     "params":{
         "symbol":"BTCUSD-PERP",
-        "positionId":612705754,
+        "contractId":612705754,
         "ordType":"MARKET",
         "px":0,
         "qty":10
