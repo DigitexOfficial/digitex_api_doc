@@ -40,7 +40,7 @@ And in case of error response would be like:
 
 <u>Note</u>: the error will also be returned in case of system maintenance and absence of data for the response. 
 
-Possible value of order's `status`:  `PENDING`, `ACCEPTED`, `REJECTED`, `CANCELED`, `FILLED`, `PARTIAL`, `TERMINATED`, `EXPIRED`, `TRIGGERED`.
+Possible value of order's `status`:  `PENDING`, `ACCEPTED`, `REJECTED`, `CANCELLED`, `FILLED`, `PARTIALLY_FILLED`, `TERMINATED`, `EXPIRED`, `TRIGGERED`.
 
 Possible values of `ordType`: `MARKET`, `LIMIT`.
 
