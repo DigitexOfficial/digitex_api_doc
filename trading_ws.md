@@ -892,8 +892,7 @@ The exchange will respond with the following:
                 "fundingVolume":0,
                 "fundingCount":0
             }
-        ],
-        "activeOrders":[]
+        ]
     }
 }
 ```
