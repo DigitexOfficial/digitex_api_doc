@@ -48,7 +48,7 @@ Possible values of `timeInForce`: `GTD`, `GTC`, `GTF`, `IOC`, `FOK`.
 
 Possible values of `side`: `BUY`, `SELL`.
 
-Possible values of `ch` (channel name): `error`, `orderStatus`, `orderFilled`, `orderCancelled`, `contractClosed`, `traderStatus`,`traderBalance`, `position`, `funding`, `leverage`.
+Possible values of `ch` (channel name): `error`, `orderStatus`, `orderFilled`, `orderCancelled`, `contractClosed`, `traderStatus`, `traderBalance`, `position`, `funding`, `leverage`, `condOrderStatus`.
 
 For `BTCUSD-PERP`: order price should be positive and a <u>multiple of 5</u>, order quantity should be positive and <u>integral</u>.
 
