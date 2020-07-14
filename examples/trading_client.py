@@ -198,6 +198,8 @@ async def handle_exchange_message(ws, msg):
             await handle_conditional_order_status(ws, msg)
         elif channel == "leverage":
             await handle_leverage(ws, msg)
+        elif channel == "funding":
+            await handle_funding(ws, msg)
         else:
             print(f"unhandled message: {msg}")
     except Exception as e:
@@ -541,6 +543,25 @@ async def handle_leverage(ws, msg):
                                     "qty": qty
                                     }
     print("active_orders: ", active_orders)
+
+
+async def handle_funding(ws, msg):
+    global open_contracts
+
+    print(msg)
+    data = msg["data"]
+
+    symbol = data["symbol"]
+    trader_balance = data["traderBalance"]
+    payout = data["payout"]
+    pos_margin_change = data["positionMarginChange"]
+    print(f"trader balance = {trader_balance}, payout = {payout}, position margin change = {pos_margin_change}")
+
+    open_contracts = {}
+    for c in data["contracts"]:
+        contract_id = c["contractId"]
+        open_contracts[contract_id] = c
+    print("open contracts: ", open_contracts)
 
 
 async def handle_error(ws, msg):

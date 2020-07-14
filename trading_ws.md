@@ -914,6 +914,19 @@ Trader will receive the following message if he/she has open position during fun
     "ch":"funding",
     "data":{
         "symbol":"BTCUSD-PERP",
+        "traderBalance":100549.736,
+        "orderMargin":0,
+        "positionMargin":1850.59,
+        "upnl":0,
+        "pnl":0,
+        "positionContracts":0,
+        "positionVolume":0,
+        "positionLiquidationVolume":0,
+        "positionBankruptcyVolume":0,
+        "payout":-1.86,
+        "payoutPerContract":0.0186,
+        "markPx":238.8477,
+        "positionMarginChange":-1.86,
         "contracts":[
             {
                 "timestamp":1594137600000,
@@ -923,7 +936,8 @@ Trader will receive the following message if he/she has open position during fun
                 "paidPx":927.5,
                 "liquidationPx":8815,
                 "bankruptcyPx":8348.43,
-                "qty":25,"exitPx":0,
+                "qty":25,
+                "exitPx":0,
                 "leverage":10,
                 "contractId":614339945,
                 "oldContractId":614224561,
@@ -944,20 +958,7 @@ Trader will receive the following message if he/she has open position during fun
             {
                 ...omitted...
             }
-        ],
-        "traderBalance":100549.736,
-        "orderMargin":0,
-        "positionMargin":1850.59,
-        "upnl":0,
-        "pnl":0,
-        "positionContracts":0,
-        "positionVolume":0,
-        "positionLiquidationVolume":0,
-        "positionBankruptcyVolume":0,
-        "payout":-1.86,
-        "payoutPerContract":0.0186,
-        "markPx":238.8477,
-        "positionMarginChange":-1.86
+        ]
     }
 } 
 ```
