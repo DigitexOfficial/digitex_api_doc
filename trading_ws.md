@@ -524,6 +524,8 @@ If a conditional order was created successfully the exchange will send the follo
 }
 ```
 
+In case of an error the value of `status` will be set to `REJECTED` and `errCode` will provide the appropriate error code.
+
 When conditional order is triggered the exchange will inform the trader with the following message and activate the order:
 
 ```json
@@ -605,6 +607,8 @@ The exchange will send a list of all cancelled conditional orders:
 For each cancelled conditional order the engine will generate a new `actionId`. 
 
 The previous one will be assigned to field `oldActionId`.
+
+In case of error the value of `status` will be set to `REJECTED` and `errCode` will contain the appropriate error code.
 
 ------
 
