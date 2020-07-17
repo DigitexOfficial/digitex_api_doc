@@ -127,6 +127,36 @@ Trader need to send `auth` message with the token every time he/she gets this er
 
 ------
 
+#### Trading Status
+
+If authentication was successful and trading engine is ready to receive and process trader's request the following message will be received:
+
+```json
+{
+    "ch":"tradingStatus",
+    "data":{
+        "available":true
+    }
+}
+```
+
+This message indicates that trader can start trading.
+
+In case of maintenance, connection issues, etc. trader will receive the following:
+
+```json
+{
+    "ch":"tradingStatus",
+    "data":{
+        "available":false
+    }
+}
+```
+
+This message indicates that trading is not available in that very moment.
+
+------
+
 #### Place Order
 
 To place a new order the following message should be sent:
