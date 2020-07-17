@@ -213,6 +213,8 @@ If the order has been accepted by the trading engine trader will receive the fol
 
 The value of `clOrdId` can be used to cancel this order in the future (in case of `LIMIT` order).
 
+`orderStatus` will have a value `ACCEPTED` or `REJECTED`. In case of `REJECTED` order a field `errCode` is set to appropriate error code.
+
 `leverage` contains current trader's position.
 
 `openTime` is the timestamp when the original `placeOrder` has been handled by the trading engine.

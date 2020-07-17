@@ -8,7 +8,7 @@ import sys
 
 req_id = 0
 # specify your own token
-trader_token = "SET_YOUR_TOKEN_HERE"
+trader_token = "d1b0d094a91e4f1be2cfc1ddb93f62d9bda79b54"
 trading_available = False
 active_orders = {}
 open_contracts = {}
@@ -593,7 +593,7 @@ async def run():
 
     uri = "wss://ws.testnet.digitex.fun"
     async with websockets.connect(uri, ssl=True) as ws:
-        req = create_subscriptions_request(["BTCUSD-PERP@index", "BTCUSD-PERP@orderbook_5", "BTCUSD-PERP@ticker", "BTCUSD-PERP@trades"])
+        req = create_subscriptions_request(["BTCUSD-PERP@index", "BTCUSD-PERP@orderbook_5", "BTCUSD-PERP@ticker", "BTCUSD-PERP@trades", "BTCUSD-PERP@liquidations"])
         await send_request(ws, req)
         await authenticate(ws, trader_token)
 
