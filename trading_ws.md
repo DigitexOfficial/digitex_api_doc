@@ -441,11 +441,13 @@ The following message will be received as a result of order/orders cancellation:
 
 <u>Note</u>: `CENCELLED` order ID (`clOrdId`) - differs from ID of placed order (`oldClOrdId`).
 
-Another valid value for `status` is `TERMINATED` which is used when orders are cancelled by the exchange.
+Another valid value for `orderStatus` is `TERMINATED` which is used when orders are cancelled by the exchange.
 
-`GFD` (good for day) orders are cancelled automatically by the engine at 00:00:00 UTC of the next day. The trader will receive `orderCancelled`with the `status` equal to `EXPIRED`.
+In case of error `orderStatus` will be set to `REJECTED` and `errCode` will indicate the error.
 
-`GTF` (good till funding) orders are cancelled automatically by the engine at the next funding (i.e 00:00:00, 08:00:00, 16:00:00 UTC). The trader will receive `orderCancelled` with the `status` equal to `EXPIRED`.
+`GFD` (good for day) orders are cancelled automatically by the engine at 00:00:00 UTC of the next day. The trader will receive `orderCancelled`with the `orderStatus` equal to `EXPIRED`.
+
+`GTF` (good till funding) orders are cancelled automatically by the engine at the next funding (i.e 00:00:00, 08:00:00, 16:00:00 UTC). The trader will receive `orderCancelled` with the `orderStatus` equal to `EXPIRED`.
 
 Field `orders` contains all the orders that have been cancelled. 
 
