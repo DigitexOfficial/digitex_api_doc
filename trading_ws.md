@@ -646,7 +646,11 @@ And the response message will be the following:
 } 
 ```
 
-`orderIds` contains an array of `clOrdId`s which have been created by the exchange to close the contract. Trader also will receive `orderStatus` and `orderFilled` messages related to these orders. The latter one will contain the information about affected contracts.
+`orderIds` contains an array of `clOrdId`s which have been created by the exchange to close the contract.
+
+If an error occurs (e.g. unknown `contractId`) an array `orderIds` will be empty and `errCode` will be set to appropriate value.
+
+Trader also will receive `orderStatus` and `orderFilled` messages related to these orders. The latter one will contain the information about affected contracts.
 
 ```json
 {
@@ -865,7 +869,7 @@ Trader can change the value of current leverage via the  following message:
 
 Where `leverage` is the desired leverage.
 
-The exchange will respond with the following:
+In case of success the exchange will respond with the following:
 
 ```json
 {
@@ -936,6 +940,10 @@ The exchange will respond with the following:
 ```
 
 This message contains trader's balance, current position, active orders (can be cancelled using corresponding `clOrdId`) and contracts (can be closed using corresponding `contractId`) according to a new leverage value.
+
+<u>Note</u>: trader must renew contracts and active orders on his/her side according to the new values of `contracts` and `activeOrders`.  After this operation (leverage changing) all trader's contracts and active orders will change their identifiers - trading engine will assign the new ones to them.
+
+In case of error (e.g. invalid new leverage value) the response will contain the appropriate `errCode` and `contracts`, `activeOrders` will be empty. Nothing will change.
 
 ------
 
