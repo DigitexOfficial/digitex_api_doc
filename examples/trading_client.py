@@ -9,8 +9,7 @@ import sys
 req_id = 0
 # specify your own token
 trader_token = "SET_YOUR_TOKEN_HERE"
-auth_req_id = 0
-is_authenticated = False
+trading_available = False
 active_orders = {}
 open_contracts = {}
 active_cond_orders = {}
@@ -200,6 +199,8 @@ async def handle_exchange_message(ws, msg):
             await handle_leverage(ws, msg)
         elif channel == "funding":
             await handle_funding(ws, msg)
+        elif channel == "tradingStatus":
+            await handle_trading_status(ws, msg)
         else:
             print(f"unhandled message: {msg}")
     except Exception as e:
@@ -564,6 +565,22 @@ async def handle_funding(ws, msg):
     print("open contracts: ", open_contracts)
 
 
+async def handle_trading_status(ws, msg):
+    global trading_available
+
+    print(msg)
+    data = msg["data"]
+    if data["available"] is True:
+        # trading is available
+        # trade requests can be sent
+        trading_available = True
+        print("trading: AVAILABLE")
+        await get_trader_status(ws)
+    else:
+        trading_available = False
+        print("trading: NOT AVAILABLE")
+
+
 async def handle_error(ws, msg):
     print(msg)
 
@@ -571,7 +588,6 @@ async def handle_error(ws, msg):
 async def run():
     global trader_token
     global auth_req_id
-    global is_authenticated
 
     random.seed()
 
@@ -593,11 +609,6 @@ async def run():
                     await handle_exchange_message(ws, response)
                 else:
                     print(f"received: {response}")
-                    if "id" in response and response["id"] == auth_req_id:
-                        if response["status"] == "ok":
-                            print("authenticated")
-                            is_authenticated = True
-                            await get_trader_status(ws)
 
 
 asyncio.get_event_loop().run_until_complete(run())
