@@ -8,7 +8,7 @@ import sys
 
 req_id = 0
 # specify your own token
-trader_token = "d1b0d094a91e4f1be2cfc1ddb93f62d9bda79b54"
+trader_token = "SET_YOUR_TOKEN_HERE"
 trading_available = False
 active_orders = {}
 open_contracts = {}
