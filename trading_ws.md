@@ -1047,20 +1047,35 @@ If trader's position has been liquidated and/or active orders have been terminat
 
 ------
 
-#### Errors
+#### Errors codes
 
-Exchange can respond with an error to incoming trade message:
-
-```json
-{
-    "ch":"error",
-    "data":{
-        "symbol":"BTCUSD-PERP",
-        "code":10,
-        "msg":"ID doesn't exist"
-    }
-}
-```
-
-------
+| Code  | Description                           |
+| ----- | ------------------------------------- |
+| 3     | ID already exists                     |
+| 10    | ID doesn't exist                      |
+| 14    | Unknown trader                        |
+| 18    | Invalid leverage                      |
+| 19    | Invalid price                         |
+| 20    | Invalid quantity                      |
+| 22    | No market price                       |
+| 27    | Not enough balance                    |
+| 34    | Invalid contract ID                   |
+| 35    | Rate limit exceeded                   |
+| 36    | No contracts                          |
+| 37    | No opposing orders                    |
+| 40    | Price is worse than liquidation price |
+| 45    | Tournament in progress                |
+| 53    | Max quantity exceeded                 |
+| 54    | PnL is too negative                   |
+| 55    | Order would become invalid            |
+| 58    | Trading suspended                     |
+| 63    | Can't be filled                       |
+| 65    | Too many conditional orders           |
+| 3001  | Bad request                           |
+| 3011  | Not implemented                       |
+| 3012  | Internal error                        |
+| 3013  | Not authorized                        |
+| 3014  | Already authorized                    |
+| 3015  | Trading is not available              |
+| 10501 | Invalid credentials                   |
 
