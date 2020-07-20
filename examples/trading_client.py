@@ -395,9 +395,11 @@ async def handle_order_status(ws, msg):
     print(msg)
 
     data = msg["data"]
-    if data["orderStatus"] == "ACCEPTED":
+    cl_ord_id = data["clOrdId"]
+    status = data["orderStatus"]
+
+    if status == "ACCEPTED":
         symbol = data["symbol"]
-        cl_ord_id = data["clOrdId"]
         ord_type = data["orderType"]
         ord_side = data["orderSide"]
         ord_tif = data["timeInForce"]
@@ -415,6 +417,11 @@ async def handle_order_status(ws, msg):
                                     "px": px,
                                     "qty": qty
                                     }
+    elif status == "REJECTED" and "errCode" in data:
+        error_code = data["errCode"]
+        print(f"order {cl_ord_id} has been REJECTED with error code: {error_code}")
+    else:
+        print(f"order {cl_ord_id} has been {status}")
 
     print(f"active orders: {active_orders}")
 
@@ -471,15 +478,32 @@ async def handle_order_cancelled(ws, msg):
     print(msg)
 
     data = msg["data"]
-    cancelled_order_id = data["prevClOrdId"]
-    if cancelled_order_id in active_orders:
-        active_orders.pop(cancelled_order_id)
+    status = data["orderStatus"]
+
+    if status == "REJECTED" and "errCode" in data:
+        error_code = data["errCode"]
+        print(f"order cancellation REJECTED with error code: {error_code}")
+        return
+
+    if "orders" not in data:
+        return
+    
+    for order in data["orders"]:
+        cancelled_order_id = order["oldClOrdId"]
         print(f"order {cancelled_order_id} has been CANCELLED")
+        if cancelled_order_id in active_orders:
+            active_orders.pop(cancelled_order_id)
+        
     print(f"active orders: {active_orders}")
 
 
 async def handle_contract_closed(ws, msg):
     print(msg)
+
+    data = msg["data"]
+    if "errCode" in data:
+        error_code = data["errCode"]
+        print(f"contract close operation FAILED with error code: {error_code}")
 
 
 async def handle_conditional_order_status(ws, msg):
@@ -488,6 +512,11 @@ async def handle_conditional_order_status(ws, msg):
     print(msg)
     data = msg["data"]
     status = data["status"]
+
+    if "errCode" in data:
+        error_code = data["errCode"]
+        print(f"conditional order placement/cancellation FAILED with error code: {error_code}")
+        return
 
     if status == "ACCEPTED":
         for co in data["conditionalOrders"]:
@@ -509,9 +538,14 @@ async def handle_leverage(ws, msg):
     global open_contracts
 
     print(msg)
+
     data = msg["data"]
     leverage = data["leverage"]
-    print(f"trader leverage now is {leverage}")
+    print(f"trader leverage now is: {leverage}")
+    if "errCode" in data:
+        error_code = data["errCode"]
+        print(f"leverage change FAILED with error code: {error_code}")
+        return
 
     trader_balance = data["traderBalance"]
     print(f"trader balance: {trader_balance}")
