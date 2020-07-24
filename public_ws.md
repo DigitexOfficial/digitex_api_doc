@@ -254,7 +254,7 @@ Message
 
 ```json
 {
-    "ch":"funding",
+    "ch":"fundingInfo",
     "data":{
         "symbol":"BTCUSD-PERP",
         "ts":157743360000,
