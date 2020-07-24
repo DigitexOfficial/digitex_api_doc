@@ -97,7 +97,7 @@ The `id` used in JSON as an identifier of the request. The response for the part
 - liquidations
 - insurance
 - ticker
-- funding
+- fundingInfo
 - index
 
 #### Orderbook channel
@@ -244,7 +244,7 @@ Message
 
 `contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_PRICE`, where `TICK_SIZE`=5 and `TICK_PRICE`=0.1 for BTCUSD-PERP contract.
 
-#### Funding channel
+#### Funding Info channel
 
 **Channel name:** `<symbol>@funding`
 
