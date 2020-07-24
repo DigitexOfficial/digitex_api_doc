@@ -240,8 +240,6 @@ Message
 }
 ```
 
-`volume24hUsd` is calculated as: `volume24h` * `contractValue` * `dgtxUsdRate`.
-
 `openInterestUsd` is calculated as: `openInterest` * `contractValue` * `dgtxUsdRate`.
 
 `contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_PRICE`, where `TICK_SIZE`=5 and `TICK_PRICE`=0.1 for BTCUSD-PERP contract.
