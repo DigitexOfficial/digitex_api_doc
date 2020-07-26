@@ -115,15 +115,14 @@ If provided token isn't valid trader will receive the following message:
 
 ```json
 {
-    "ch":"error",
-    "data":{
-        "code":10501,
-        "msg":"invalid credentials"
-    }
+    "id":2,
+    "status":"error",
+    "code":10501,
+    "msg":"invalid credentials"
 }
 ```
 
-Trader need to send `auth` message with the token every time he/she gets this error.
+Trader needs to send again the `auth` message with the token every time he/she gets this error.
 
 ------
 
@@ -1047,7 +1046,9 @@ If trader's position has been liquidated and/or active orders have been terminat
 
 ------
 
-#### Errors codes
+#### Error codes
+
+Trader can receive error code with the response for a specific request (e.g. `placeOrder`).
 
 | Code  | Description                           |
 | ----- | ------------------------------------- |
@@ -1071,11 +1072,28 @@ If trader's position has been liquidated and/or active orders have been terminat
 | 58    | Trading suspended                     |
 | 63    | Can't be filled                       |
 | 65    | Too many conditional orders           |
+| 68    | Too many orders                       |
 | 3001  | Bad request                           |
 | 3011  | Not implemented                       |
 | 3012  | Internal error                        |
 | 3013  | Not authorized                        |
 | 3014  | Already authorized                    |
 | 3015  | Trading is not available              |
+| 3016  | Authentication in progress            |
 | 10501 | Invalid credentials                   |
 
+In case of a general error the following message will be sent by the server:
+
+```json
+{
+    "ch":"error",
+    "data":{
+        "code":error_code,
+        "msg":"error message"
+    }
+}
+```
+
+------
+
+#### 
