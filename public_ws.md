@@ -246,7 +246,7 @@ Message
 
 #### Funding Info channel
 
-**Channel name:** `<symbol>@funding`
+**Channel name:** `<symbol>@fundingInfo`
 
 Message
 
