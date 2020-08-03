@@ -56,6 +56,10 @@ All timestamps are provided in milliseconds.
 
 <u>Note</u>: the trader cannot have a mix of long and short contracts in his/her position.
 
+#### Rate limit
+
+Currently our trading API allows up to 50 requests per second.
+
 #### Order Chain
 
 Each active order in the engine has a unique order identifier (`clOrdId`). 
@@ -1080,6 +1084,7 @@ Trader can receive error code with the response for a specific request (e.g. `pl
 | 3014  | Already authorized                    |
 | 3015  | Trading is not available              |
 | 3016  | Authentication in progress            |
+| 3017  | Request limit exceeded                |
 | 10501 | Invalid credentials                   |
 
 In case of a general error the following message will be sent by the server:
@@ -1096,4 +1101,3 @@ In case of a general error the following message will be sent by the server:
 
 ------
 
-#### 
