@@ -1,8 +1,12 @@
 ### Public Websocket API Draft
 
-#### General information
+#### Endpoints
 
-*WS API URL* [wss://ws-api.sandbox.digitex.fun](wss://ws-api.sandbox.digitex.fun)
+*Testnet API URL*: <wss://ws.tapi.digitexfutures.com>.
+
+*Mainnet API URL*: <wss://ws.mapi.digitexfutures.com>.
+
+#### General information
 
 Server send message `ping` every 30 seconds. Client should respond with message `pong` or it would be disconnected. 
 

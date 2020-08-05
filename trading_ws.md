@@ -2,6 +2,12 @@
 
 ### General
 
+#### Endpoints
+
+*Testnet API URL*: <wss://ws.tapi.digitexfutures.com>.
+
+*Mainnet API URL*: <wss://ws.mapi.digitexfutures.com>.
+
 #### Messages
 
 *<u>Note:</u> authentication request must be sent before any other trading request.*

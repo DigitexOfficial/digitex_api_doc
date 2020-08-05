@@ -31,9 +31,9 @@ And in case of error response would be like:
 
 ### Endpoints
 
-*REST API URL* https://rest-api.sandbox.digitex.fun 
+*Testnet API URL*: https://rest.tapi.digitexfutures.com.
 
-*WS API URL* wss://ws-api.sandbox.digitex.fun
+*Mainnet API URL*: https://rest.mapi.digitexfutures.com.
 
 #### Public - Contracts
 
