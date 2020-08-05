@@ -1,3 +1,3 @@
-# DIGITEX Futures API Draft
+# DIGITEX Futures API v1
 
 See appropriate files.
