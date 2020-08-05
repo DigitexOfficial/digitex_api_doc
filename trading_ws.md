@@ -64,7 +64,7 @@ All timestamps are provided in milliseconds.
 
 #### Rate limit
 
-Currently our trading API allows up to 50 requests per second.
+Currently our trading API allows up to 10 requests per second.
 
 #### Order Chain
 
