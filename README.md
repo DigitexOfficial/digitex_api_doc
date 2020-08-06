@@ -9,7 +9,7 @@
 
 - Trading WebSocket API - https://github.com/DigitexOfficial/digitex_api_doc/blob/master/trading_ws.md 
 
-To obtain API key for your account, send e-mail request at olozoviuk@digitexfutures.com (from your account e-mail)
+To obtain API key for your account, you need to be logged at exchange, then open Account ang go to  **API** tab. Then click "Create" to generate your private API key.
 
 ## Who use our API?
 
