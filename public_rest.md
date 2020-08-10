@@ -46,10 +46,11 @@ And in case of error response would be like:
 ```json
 {
     "status":"ok",
-    "ts":1590404891291,
+    "ts":1597073306274,
     "data":[
         {
             "id":1,
+            "marketId":1,
             "name":"BTC/USD-PERP",
             "symbol":"BTCUSD-PERP",
             "type":"perpetual_futures",
@@ -58,24 +59,24 @@ And in case of error response would be like:
             "quoteCurrency":"USD",
             "pnlCurrency":"DGTX",
             "marginCurrency":"DGTX",
+            "settleCurrency":"DGTX",
             "lotSize":1,
-            "tickPrice":1,
             "isQuanto":true,
             "isInverse":false,
-            "underlyingAsset":"token",
+            "underlyingAsset":"coin",
             "indexSymbol":".DGTXBTCUSD",
             "premiumIndexSymbol":"",
-            "fundingRate":0.0003,
+            "fundingRate":0.01,
             "fundingPeriod":28800,
             "indicativeFundingRate":0,
             "markType":"fair_price",
-            "initMargin":0,
-            "maintMargin":0,
+            "initMargin":1,
+            "maintMargin":0.5,
             "deleverage":true,
-            "isLeverage": true,
-            "maxLeverage": 25,
-            "createTime":0,
-            "listingTime":0,
+            "isLeverage":true,
+            "maxLeverage":25,
+            "createTime":1588003200000,
+            "listingTime":1588003200000,
             "expiryTime":0,
             "settleTime":0,
             "makerFee":0,
@@ -83,7 +84,11 @@ And in case of error response would be like:
             "settlementFee":0,
             "insuranceFee":0,
             "minPrice":0,
-            "maxPrice":0
+            "maxPrice":0,
+            "minOrderSize":0,
+            "maxOrderSize":0,
+            "tickSize":5,
+            "tickValue":0.1
         }
     ]
 }
