@@ -99,7 +99,6 @@ The `id` used in JSON as an identifier of the request. The response for the part
 - kline_*interval*, where *interval* can be: `1min`, `3min`, `5min`, `15min`, `30min`, `1h`, `3h`, `6h`, `12h`, `1D`, `3D`, `1W`, `3W`, `1M`, `3M`, `6M`, `1Y`
 - trades
 - liquidations
-- insurance
 - ticker
 - fundingInfo
 - index
@@ -188,23 +187,6 @@ Message
             {"ts":1594039337113,"qty":75,"px":9255,"type":"SHORT"}
         ]
     }
-}
-```
-
-#### Insurance fund channel
-
-**Channel name:** `exchange@insurance`
-
-**Note:** not implemented yet.
-
-Message
-
-```json
-{
-    "ch":"insurance",
-    "data":[
-        {"currency":"DGTX","ts":123456789000,"balance":1000}
-    ]
 }
 ```
 
