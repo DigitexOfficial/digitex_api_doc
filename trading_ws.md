@@ -50,7 +50,7 @@ Possible value of order's `status`:  `PENDING`, `ACCEPTED`, `REJECTED`, `CANCELL
 
 Possible values of `ordType`: `MARKET`, `LIMIT`.
 
-Possible values of `timeInForce`: `GTD`, `GTC`, `GTF`, `IOC`, `FOK`.
+Possible values of `timeInForce`: `GFD` (Good-For-Day), `GTC` (Good-Till-Cancel), `GTF` (Good-Till-Funding), `IOC` (Immediate-Or-Cancel), `FOK` (Fill-Or-Kill).
 
 Possible values of `side`: `BUY`, `SELL`.
 
