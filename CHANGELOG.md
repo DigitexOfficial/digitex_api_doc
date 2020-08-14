@@ -43,6 +43,10 @@ To obtain version information make request to `/public/version` endpoint.
 
 - public API: add `markPx` to `/public/markets` response.
 
-10.08.2020
+###### 10.08.2020
 
 - add `tickSize` and `tickValue` to `/public/contracts` response.
+
+###### 14.08.2020
+
+- version 1.0.1 released.
