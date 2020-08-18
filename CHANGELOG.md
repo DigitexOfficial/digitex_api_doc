@@ -50,3 +50,7 @@ To obtain version information make request to `/public/version` endpoint.
 ###### 14.08.2020
 
 - version 1.0.1 released.
+
+###### 18.08.2020
+
+- update examples of trading messages in the documentation.
