@@ -1050,26 +1050,45 @@ If trader's position has been liquidated and/or active orders have been terminat
     "ch":"position",
     "data":{
         "symbol":"BTCUSD-PERP",
-        "liquidatedContracts":[array of contracts],
-        "terminatedOrders":[only clOrdId of orders],
-        "traderBalance": 2000,
-        "orderMargin": 0,
-        "positionMargin": 0,
-        "upnl": 0,
-        "pnl": 0,
-        "accumQty": 0,
-        "positionContracts": 0,
-        "positionVolume": 0,
-        "positionLiquidationVolume": 0,
-        "positionBankruptcyVolume": 0,
-        "traderBalanceIncrement": 1000,
-        "markPx": 9285
+        "liquidatedContracts":[
+            {
+                "contractId":680407585,
+                "oldContractId":679984688,
+                "isLiquidation":1,
+                "entryPx":0,
+                "paidPx":0,
+                "liquidationPx":0,
+                "bankruptcyPx":0,
+                "qty":0,
+                "exitPx":0,
+                "entryQty":0,
+                "exitQty":0,
+                "exitVolume":0,
+                "fundingPaidPx":0,
+                "fundingQty":0,
+                "fundingVolume":0,
+                "fundingCount":0,
+                "origContractId":679035345
+            }
+        ],
+        "terminatedOrders":[],
+        "traderBalanceIncrement":-612.055,
+        "traderBalance":104049.3477,
+        "positionType":"LONG",
+        "positionContracts":27,
+        "positionMargin":660.6994,
+        "orderMargin":0,
+        "upnl":-326.2,
+        "pnl":-662.33,
+        "positionVolume":330995,
+        "positionLiquidationVolume":314530,
+        "positionBankruptcyVolume":297960.03,
+        "markPx":11654.9973
     }
-}
-        
+}       
 ```
 
-`liquidatedContracts` contains an array of liquidated contracts (the same structure as in `traderStatus` message).
+`liquidatedContracts` contains an array of liquidated contracts (the same structure as in `traderStatus` message). `oldContractId` represents the ID of liquidated contract.
 
 `terminatedOrders` contains an array of `clOrdId`s of terminated orders.
 
