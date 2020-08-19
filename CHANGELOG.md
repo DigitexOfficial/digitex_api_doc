@@ -54,3 +54,7 @@ To obtain version information make request to `/public/version` endpoint.
 ###### 18.08.2020
 
 - update examples of trading messages in the documentation.
+
+###### 19.08.2020
+
+- API v1.0.2 released.
