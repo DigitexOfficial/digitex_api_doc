@@ -65,7 +65,7 @@ async def handle_spot_price(ws, symbol, px):
     # make actiions according to 'symbol': currently it can be either BTCUSD-PERP or ETHUSD-PERP
 
     # some random condition
-    value = random.randint(1, 300)
+    # value = random.randint(1, 300)
     # ---> Example of placing LIMIT order
     #if value == 151:
     #    side = random.choice(["BUY", "SELL"])
@@ -124,7 +124,7 @@ async def handle_spot_price(ws, symbol, px):
 
 
 async def handle_orderbook(ws, msg):
-    if len(msg["data"]["bids"]) == 0 and len(asks = msg["data"]["asks"]) == 0:
+    if len(msg["data"]["bids"]) == 0 and len(msg["data"]["asks"]) == 0:
         return
 
     bids = msg["data"]["bids"]
@@ -201,6 +201,8 @@ async def handle_exchange_message(ws, msg):
             await handle_funding(ws, msg)
         elif channel == "tradingStatus":
             await handle_trading_status(ws, msg)
+        elif channel == "position":
+            await handle_liquidated_position(ws, msg)
         else:
             print(f"unhandled message: {msg}")
     except Exception as e:
@@ -559,6 +561,7 @@ async def handle_leverage(ws, msg):
     data = msg["data"]
     leverage = data["leverage"]
     print(f"trader leverage now is: {leverage}")
+
     if "errCode" in data:
         error_code = data["errCode"]
         print(f"leverage change FAILED with error code: {error_code}")
@@ -603,7 +606,6 @@ async def handle_funding(ws, msg):
     print(msg)
     data = msg["data"]
 
-    symbol = data["symbol"]
     trader_balance = data["traderBalance"]
     payout = data["payout"]
     pos_margin_change = data["positionMarginChange"]
@@ -634,6 +636,39 @@ async def handle_trading_status(ws, msg):
 
 async def handle_error(ws, msg):
     print(msg)
+
+
+async def handle_liquidated_position(ws, msg):
+    global active_orders
+    global open_contracts
+
+    print(msg)
+    data = msg["data"]
+
+    for cl_ord_id in data["terminatedOrders"]:
+        if cl_ord_id in active_orders:
+            active_orders.pop(cl_ord_id)
+
+    print("active_orders: ", active_orders)
+
+    if "traderBalanceIncrement" in data:
+        balance_delta = data["traderBalanceIncrement"]
+        print(f"trader balance increment/decrement: {balance_delta}")
+
+    trader_balance = data["traderBalance"]
+    print(f"trader balance: {trader_balance}")
+
+    if "positionType" in data:
+        total_contracts = data["positionContracts"]
+        pos_type = data["positionType"]
+        print(f"trader position: {pos_type}@{total_contracts}")
+
+    for contract in data["liquidatedContracts"]:
+        id = contract["oldContractId"]
+        if id in open_contracts:
+            open_contracts.pop(id)
+
+    print("open contracts: ", open_contracts)
 
 
 async def run():
