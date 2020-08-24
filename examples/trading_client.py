@@ -440,6 +440,23 @@ async def handle_order_filled(ws, msg):
         print(f"order {filled_ord_id} has been FILLED")
     elif order_status == "PARTIALLY_FILLED":
         print(f"order {filled_ord_id} has been PARTIALLY FILLED")
+        
+        new_order_id = data["newClOrdId"]
+        symbol = data["symbol"]
+        ord_type = data["orderType"]
+        ord_side = data["orderSide"]
+        ord_tif = data["timeInForce"]
+        px = data["px"]
+        qty = data["qty"]
+        
+        print("add order {} to active orders".format(new_order_id))
+        active_orders[new_order_id] = {"symbol": symbol,
+                                       "orderType": ord_type,
+                                       "side": ord_side,
+                                       "tif": ord_tif,
+                                       "px": px,
+                                       "qty": qty
+                                       }
     else:
         print(f"order {filled_ord_id} has status: {order_status}")
 
