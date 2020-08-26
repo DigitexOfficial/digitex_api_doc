@@ -95,7 +95,7 @@ The `id` used in JSON as an identifier of the request. The response for the part
 
 #### List of public channels
 
-- orderbook_*depth*, where *depth* can be: `5`, `10`, `25`, `50` of `full`.
+- orderbook_*depth*, where *depth* can be: `1`, `5`, `10`, `25`, `50` of `full`.
 - kline_*interval*, where *interval* can be: `1min`, `3min`, `5min`, `15min`, `30min`, `1h`, `3h`, `6h`, `12h`, `1D`, `3D`, `1W`, `3W`, `1M`, `3M`, `6M`, `1Y`
 - trades
 - liquidations
