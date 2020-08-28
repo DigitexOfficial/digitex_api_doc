@@ -1,5 +1,11 @@
 # CHANGELOG
 
+###### 28.08.2020
+
+* API v1.0.3 released.
+
+------
+
 ###### 26.08.2020
 
 - WS Trading API: rate limiter improved.
