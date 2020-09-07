@@ -58,6 +58,8 @@ Possible values of `ch` (channel name): `error`, `orderStatus`, `orderFilled`, `
 
 For `BTCUSD-PERP`: order price should be positive and a <u>multiple of 5</u>, order quantity should be positive and <u>integral</u>.
 
+For `ETHUSD-PERP`: order price should be positive and a <u>multiple of 0.25</u>, order quantity should be positive and <u>integral</u>.
+
 All timestamps are provided in milliseconds.
 
 <u>Note</u>: the trader cannot have a mix of long and short contracts in his/her position.

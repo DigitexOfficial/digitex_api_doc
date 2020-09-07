@@ -1,5 +1,10 @@
 # CHANGELOG
 
+###### 07.09.2020
+
+* Added `ETHUSD-PERP` contract to MAINNET configuration.
+* API v1.0.5 released.
+
 ###### 28.08.2020
 
 * API v1.0.3 released.
