@@ -404,10 +404,10 @@ And in case of error response would be like:
 
 `openInterestUsd` is calculated as: `openInterest` * `contractValue` * `dgtxUsdRate`.
 
-`contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_PRICE`, where:
+`contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_VALUE`, where:
 
-*  `TICK_SIZE`=5 and `TICK_PRICE`=0.1 for `BTCUSD-PERP` contract;
-* `TICK_SIZE`=0.25 and `TICK_PRICE`=0.25 for `ETHUSD-PERP` contract.
+*  `TICK_SIZE`=5 and `TICK_VALUE`=0.1 for `BTCUSD-PERP` contract;
+* `TICK_SIZE`=0.25 and `TICK_VALUE`=0.25 for `ETHUSD-PERP` contract.
 
 
 
