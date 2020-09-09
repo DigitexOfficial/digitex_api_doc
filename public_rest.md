@@ -89,6 +89,49 @@ And in case of error response would be like:
             "maxOrderSize":0,
             "tickSize":5,
             "tickValue":0.1
+        },
+        {
+            "id":2,
+            "marketId":2,
+            "name":"ETH/USD-PERP",
+            "symbol":"ETHUSD-PERP",
+            "type":"perpetual_futures",
+            "isTradable":true,
+            "baseCurrency":"ETH",
+            "quoteCurrency":"USD",
+            "pnlCurrency":"DGTX",
+            "marginCurrency":"DGTX",
+            "settleCurrency":"DGTX",
+            "lotSize":1,
+            "isQuanto":true,
+            "isInverse":false,
+            "underlyingAsset":"coin",
+            "indexSymbol":".DGTXETHUSD",
+            "premiumIndexSymbol":"",
+            "fundingRate":0.01,
+            "fundingPeriod":28800,
+            "indicativeFundingRate":0,
+            "markType":"fair_price",
+            "initMargin":1,
+            "maintMargin":0.5,
+            "deleverage":true,
+            "isLeverage":true,
+            "maxLeverage":25,
+            "createTime":1588003200000,
+            "listingTime":0,
+            "expiryTime":0,
+            "settleTime":0,
+            "makerFee":0,
+            "takerFee":0,
+            "settlementFee":0,
+            "insuranceFee":0,
+            "minPrice":0,
+            "maxPrice":0,
+            "minOrderSize":0,
+            "maxOrderSize":0,
+            "tickSize":0.25,
+            "tickValue":0.25,
+            "priceIncrement":1
         }
     ]
 }
@@ -328,6 +371,32 @@ And in case of error response would be like:
             "openInterestUsd":4586283.33,
             "dgtxUsdRate":0.03728994,
             "insuranceFund":1711653380.28
+        },
+        {
+            "symbol":"ETHUSD-PERP",
+            "openTime":1599558120000,
+            "closeTime":1599644520000,
+            "openPx":342.75,
+            "highPx24h":346.5,
+            "lowPx24h":325.5,
+            "pxChange24h":0.66,
+            "volume24h":983328,
+            "volume24hUsd":11797492.97,
+            "fundingTime":1599667200000,
+            "fundingRate":0.01,
+            "bestBidPx":344.75,
+            "bestBidQty":88,
+            "bestAskPx":345,
+            "bestAskQty":573,
+            "lastTradePx":345,
+            "lastTradeQty":186,
+            "lastTradeTs":1599644494456,
+            "contractValue":345,
+            "openInterest":9465,
+            "openInterestUsd":116110.45,
+            "dgtxUsdRate":0.03555753,
+            "insuranceFund":239178.5,
+            "markPx":346.7181
         }
     ]
 }
@@ -335,7 +404,12 @@ And in case of error response would be like:
 
 `openInterestUsd` is calculated as: `openInterest` * `contractValue` * `dgtxUsdRate`.
 
-`contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_PRICE`, where `TICK_SIZE`=5 and `TICK_PRICE`=0.1 for BTCUSD-PERP contract.
+`contractValue` is calculated as: `lastTradePx` / `TICK_SIZE` * `TICK_PRICE`, where:
+
+*  `TICK_SIZE`=5 and `TICK_PRICE`=0.1 for `BTCUSD-PERP` contract;
+* `TICK_SIZE`=0.25 and `TICK_PRICE`=0.25 for `ETHUSD-PERP` contract.
+
+
 
 ------
 
@@ -379,7 +453,7 @@ And in case of error response would be like:
 
 | Parameter | Type   | Description                                                  |
 | --------- | ------ | ------------------------------------------------------------ |
-| symbol    | String | Contract symbol or index symbol, e.g. 'BTCUSD-PERP', '.DGTXBTCUSD' |
+| symbol    | String | Contract symbol or index symbol, e.g. 'BTCUSD-PERP'          |
 | interval  | String | Default: `1min`. Possible values: `1min`, `3min`, `5min`, `15min`, `30min`, `1h`, `3h`, `6h`, `12h`, `1D`, `3D`, `1W`, `3W`, `1M`, `3M`, `6M`, `1Y` |
 | from      | int64  | Default: 0.                                                  |
 | to        | int64  | Default: 0.                                                  |
