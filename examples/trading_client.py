@@ -677,7 +677,8 @@ async def run():
 
     random.seed()
 
-    uri = "wss://ws.testnet.digitex.fun"
+    # use wss://ws.mapi.digitexfutures.com for mainnet environment
+    uri = "wss://ws.tapi.digitexfutures.com"
     async with websockets.connect(uri, ssl=True) as ws:
         req = create_subscriptions_request(["BTCUSD-PERP@index", "BTCUSD-PERP@orderbook_5", "BTCUSD-PERP@ticker", "BTCUSD-PERP@trades", "BTCUSD-PERP@liquidations"])
         await send_request(ws, req)
