@@ -174,8 +174,6 @@ Message
 
 **Channel name:** `<symbol>@liquidations`
 
-**Note:** not implemented yet.
-
 Message
 
 ```json
