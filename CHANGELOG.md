@@ -1,5 +1,10 @@
 # CHANGELOG
 
+###### 21.09.2020
+
+* Add `XRPUSD-PERP` contract to MAINNET.
+* Release v1.0.6 created.
+
 ###### 07.09.2020
 
 * Added `ETHUSD-PERP` contract to MAINNET configuration.
@@ -14,7 +19,7 @@
 ###### 26.08.2020
 
 - WS Trading API: rate limiter improved.
-- WS Trading API: fix issued with `side` of `marketTrades` .
+- WS Trading API: fix issue with `side` of `marketTrades` .
 - WS Public API: introduce channel `<CONTRACT>@orderbook_1`. 
 - WS Public API: don't send cached messages from already subscribed channels after `subscribe`.
 - WS Public API: subscription more than one time for the same channel doesn't produce an error.

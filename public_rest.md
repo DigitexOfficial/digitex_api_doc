@@ -515,7 +515,7 @@ And in case of error response would be like:
             "updated":1590999736783,
             "markPx":9549.4469,
             "fairPx":9549.4469,
-            "spotPx":0,
+            "spotPx":9549.4469,
             "components":{
                 "binance":{
                     "weight":25,"ts":0,"px":0,"vol":0
