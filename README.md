@@ -1,5 +1,9 @@
 # DIGITEX Futures API v1
 
+## New version
+
+Check out a new version of API documentation: https://digitexofficial.github.io/api-docs/#introduction
+
 ## Public endpoint (no auth)
 
 - Public REST API for market data - https://github.com/DigitexOfficial/digitex_api_doc/blob/master/public_rest.md
