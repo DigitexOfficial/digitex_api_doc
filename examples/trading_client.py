@@ -54,6 +54,13 @@ async def handle_index_price(ws, msg):
         symbol = "BTCUSD-PERP"
     elif msg["data"]["indexSymbol"] == ".DGTXETHUSD":
         symbol = "ETHUSD-PERP"
+    elif msg["data"]["indexSymbol"] == ".DGTXXRPUSD":
+        symbol = "XRPUSD-PERP"
+    
+    if len(symbol) == 0:
+        print("unknown contract for index symbol")
+        return 
+    
     await handle_spot_price(ws, symbol, px)
 
 
@@ -167,6 +174,16 @@ async def handle_ticker(ws, msg):
     #print(f"got 24 stats: from={open_ts} to={close_ts} high_price={high_px} low_price={low_px} price_change={px_change} volume={volume24h} funding_rate={funding_rate} contract_value={contract_value} DGTX/USD={dgtx_rate}")
 
 
+async def handle_liquidations(ws, msg):
+    data = msg["data"]
+    positions = data["positions"]
+    for p in positions:
+        qty = p["qty"]
+        px = p["px"]
+        t = p["type"]
+        print(f"position liquidated: {t} {qty}@{px}")
+
+
 async def handle_exchange_message(ws, msg):
     channel = msg["ch"]
 
@@ -181,6 +198,8 @@ async def handle_exchange_message(ws, msg):
             await handle_kline(ws, msg)
         elif channel == "ticker":
             await handle_ticker(ws, msg)
+        elif channel == "liquidations":
+            await handle_liquidations(ws, msg)
         elif channel == "orderStatus":
             await handle_order_status(ws, msg)
         elif channel == "orderFilled":
